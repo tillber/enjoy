@@ -12,14 +12,9 @@ public class RequestDispatcher {
       return "login";
     }
 	
-	@PostMapping("/login")
-	String postLogin() {
-		return "suh";
-	}
-	
 	@GetMapping
 	String index() {
-		return("<h1>Hello World</h1>");
+		return "index";
 	}
 	
 	@GetMapping("/applicant")
