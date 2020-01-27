@@ -2,14 +2,34 @@ package se.madev.main.view;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class RequestDispatcher {
-		
-	@GetMapping()
-	String login() {
-		return "login";
+	
+	@GetMapping("/login")
+    String getLogin() {
+      return "login";
+    }
+	
+	@PostMapping("/login")
+	String postLogin() {
+		return "suh";
+	}
+	
+	@GetMapping
+	String index() {
+		return("<h1>Hello World</h1>");
+	}
+	
+	@GetMapping("/applicant")
+	String applicant() {
+		return("<h1>Hello Applicant</h1>");
+	}
+	
+	@GetMapping("/recruiter")
+	String recruiter() {
+		return("<h1>Hello Recruiter</h1>");
 	}
 	
 }

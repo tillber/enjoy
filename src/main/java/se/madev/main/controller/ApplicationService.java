@@ -1,5 +1,10 @@
 package se.madev.main.controller;
 
+import java.util.Collections;
+
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+
 import se.madev.main.integration.DBHandler;
 import se.madev.main.model.IncorrectPasswordException;
 import se.madev.main.model.User;
@@ -12,11 +17,11 @@ public class ApplicationService {
 		repository = new DBHandler();
 	}
 	
-	public String authenticate(String username, String password) throws IncorrectPasswordException, UserDoesNotExistException {
-		User user = new User(username, password);
-		if(user.equals(new User("hello", "world"))) {
-			String token = Authorizer.createToken("1", "Controller", "login", (long)50);
-			return token;
+	public Authentication authenticate(Authentication authentication) throws IncorrectPasswordException, UserDoesNotExistException {
+		String username = authentication.getName();
+		String password = authentication.getCredentials().toString();
+		if(new User(username, password).equals(new User("hello", "world"))) {
+			return new UsernamePasswordAuthenticationToken(username, password, Collections.emptyList());
 		}else {
 			throw new IncorrectPasswordException();
 		}
