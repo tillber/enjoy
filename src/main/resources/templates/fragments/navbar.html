@@ -1,0 +1,28 @@
+<nav class="navbar is-light" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="/applicant/index">
+      RecruitmentApplication
+    </a>
+
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+    
+    </div>
+    <div class="navbar-menu">
+    <div class="navbar-end">
+	    <div class="navbar-item has-dropdown is-hoverable">
+        <span class="navbar-link">
+          Logged in as&nbsp;<b><span sec:authentication="name">NOT FOUND</span></b>
+        </span>
+        <div class="navbar-dropdown is-boxed">
+          <a class="navbar-item" href="https://bulma.io/documentation/overview/start/">
+            Logout
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>

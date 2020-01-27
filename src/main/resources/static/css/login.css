@@ -1,0 +1,36 @@
+.container{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+}
+form.login-form{
+	width: 20rem;
+	height: 30rem;
+}
+form.register-form{
+	width: 30rem;
+	height: 38rem;
+}
+.label{
+	color: #363636;
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 400;
+}
+div.form-title{
+	text-align:center;
+	margin-bottom: 2rem;
+}
+button.login-button{
+	width: 100%;
+}
+button.register-button{
+	margin-top: 1.5rem;
+}
+input[type="date"]::-webkit-clear-button {
+    display: none;
+}
+input[type="date"]::-webkit-inner-spin-button {
+    display: none;
+}

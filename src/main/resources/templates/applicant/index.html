@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<meta charset="ISO-8859-1">
+<title>RecruitmentApplication</title>
+<!-- CSS Files -->
+<link rel="stylesheet" th:href="@{/css/applicant.css}"/>
+<link rel="stylesheet" th:href="@{/css/style.css}"/>
+<!-- Bulma.io CSS Framework CDN -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.8.0/css/bulma.min.css" integrity="sha256-D9M5yrVDqFlla7nlELDaYZIpXfFWDytQtiV+TaH6F1I=" crossorigin="anonymous" />
+<!-- FontsAwesome -->
+<script src="https://kit.fontawesome.com/cf38924cc4.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<div th:replace="fragments/navbar"></div>
+<section class="hero is-info">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        Please make an application.
+      </h1>
+      <h2 class="subtitle">
+        You have not submitted an application yet.
+      </h2>
+    </div>
+  </div>
+</section>
+<div class="container">
+
+</div>
+</body>
+<div th:replace="fragments/footer"></div>
+</html>
