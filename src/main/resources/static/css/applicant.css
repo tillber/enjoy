@@ -1,0 +1,12 @@
+.select select{
+	width: 100% !important;
+}
+.select{
+	width: 100% !important;
+}
+tr td:last-child{
+	text-align: right !important;
+}
+tr:empty:before{
+	content: "Empty";
+}

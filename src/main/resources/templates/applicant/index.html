@@ -6,6 +6,12 @@
 <!-- CSS Files -->
 <link rel="stylesheet" th:href="@{/css/applicant.css}"/>
 <link rel="stylesheet" th:href="@{/css/style.css}"/>
+<link rel="stylesheet" href="../../static/css/applicant.css"/>
+<link rel="stylesheet" href="../../static/css/style.css"/>
+<link rel="stylesheet" th:href="@{/css/style.css}"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script th:src="@{/js/applicant.js}"></script>
+<script src="../../static/js/applicant.js"></script>
 <!-- Bulma.io CSS Framework CDN -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.8.0/css/bulma.min.css" integrity="sha256-D9M5yrVDqFlla7nlELDaYZIpXfFWDytQtiV+TaH6F1I=" crossorigin="anonymous" />
 <!-- FontsAwesome -->
@@ -13,20 +19,128 @@
 </head>
 <body>
 <div th:replace="fragments/navbar"></div>
-<section class="hero is-info">
-  <div class="hero-body">
-    <div class="container">
-      <h1 class="title">
-        Please make an application.
-      </h1>
-      <h2 class="subtitle">
-        You have not submitted an application yet.
-      </h2>
-    </div>
+<div class="area">
+<article class="message is-warning">
+  <div class="message-body">
+    <b>You have not posted your application.</b> Please fill in your profile below and provide us with information about your experience and availability, and then submit your application. 
   </div>
-</section>
-<div class="container">
-
+</article>
+<hr>
+<h6 class="subtitle is-6">Personal information</h6>
+<div class="flex-container">
+<div class="field">
+	  <label class="label">First name</label>
+	  <div class="control">
+	    <input class="input" type="text" value="Martin">
+	  </div>
+	</div>
+<div class="field">
+	  <label class="label">Last name</label>
+	  <div class="control">
+	    <input class="input" type="text" value="Tillberg">
+	  </div>
+	</div>
+<div class="field">
+	  <label class="label">Email</label>
+	  <div class="control">
+	    <input class="input" type="email" value="tillber@kth.se">
+	  </div>
+	</div>
+<div class="field">
+	  <label class="label">Date of birth</label>
+	  <div class="control">
+	    <input class="input" type="date" value="10/10/1998">
+	  </div>
+	</div>
+</div>
+<hr>
+<h6 class="subtitle is-6">Experience</h6>
+<div class="flex-container">
+	<div class="field">
+		<label class="label">Area of expertise</label>
+		<div class="control">
+			<div class="select">
+				<select id="exp-area">
+					<option>Select dropdown</option>
+					<option>With options</option>
+				</select>
+			</div>
+		</div>
+	</div>
+	<div class="field">
+		<label class="label">Number of years</label>
+		<div class="control">
+			<input class="input" type="number" value="1" min="1" id="exp-years">
+		</div>
+	</div>
+	<div class="field">
+		<label class="label">	&nbsp;</label>
+		<div class="control">
+			<button class="button" id="add-exp">Add experience</button>
+		</div>
+	</div>
+</div>
+<div class="flex-container">
+<div>
+	<table class="table is-fullwidth" id="exp-table">
+			<thead>
+				<tr>
+					<th>
+						Area of expertise
+					</th>
+					<th>
+						Number of years
+					</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody id="#exp-body">
+				<tr>
+				</tr>
+			</tbody>
+		</table>
+		</div>
+</div>
+<hr>
+<h6 class="subtitle is-6">Availability</h6>
+<div class="flex-container">
+	<div class="field">
+		<label class="label">From</label>
+		<div class="control">
+			<input class="input" type="date" value="10/10/1998">
+		</div>
+	</div>
+	<div class="field">
+		<label class="label">To</label>
+		<div class="control">
+			<input class="input" type="date" value="10/10/1998">
+		</div>
+	</div>
+	<div class="field">
+		<label class="label">	&nbsp;</label>
+		<div class="control">
+			<button class="button">Add period</button>
+		</div>
+	</div>
+</div>
+<div class="flex-container">
+<div>
+	<table class="table is-fullwidth">
+			<thead>
+				<tr>
+					<th>
+						From
+					</th>
+					<th>
+						To
+					</th>
+				</tr>
+				<tr>
+				</tr>
+			</thead>
+		</table>
+		</div>
+</div>
 </div>
 </body>
 <div th:replace="fragments/footer"></div>

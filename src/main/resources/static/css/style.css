@@ -1,5 +1,6 @@
 body, html{
 	height: 100%;
+	margin-bottom: 4rem;
 }
 footer{
 	position: fixed;
@@ -8,4 +9,25 @@ footer{
 }
 .footer{
 	padding: 1rem !important;
+}
+div.area{
+	margin-left: 2.5rem;
+	margin-right: 2.5rem;
+	margin-top: 1.5rem;
+}
+div.flex-container{
+	display: flex;
+	flex-wrap: nowrap;
+}
+div.flex-container > div{
+	width: 100%;
+	padding-top: 1rem;
+	padding-right: 1rem;
+}
+.label{
+	font-size: 0.9rem !important;
+	font-weight: 500 !important;
+}
+.subtitle{
+	margin-bottom: 0 !important;
 }
