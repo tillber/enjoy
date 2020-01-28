@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @EnableWebSecurity
 @Configuration
@@ -29,15 +30,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
         .authorizeRequests()
             .antMatchers("/css/**").permitAll()
+            .antMatchers("/").authenticated()
             .antMatchers("/recruiter").hasRole("RECRUITER")
             .antMatchers("/applicant").hasRole("APPLICANT")
             .anyRequest().authenticated()
             .and()
-        .formLogin()
-            .loginPage("/login")
-            .permitAll()
+        .formLogin().loginPage("/login").permitAll()
             .and()
-        .logout()
-            .permitAll();
+        .logout().clearAuthentication(true).logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login")
+        .deleteCookies("JSESSIONID").invalidateHttpSession(true);
     }
 }
