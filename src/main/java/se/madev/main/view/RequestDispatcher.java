@@ -13,10 +13,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class RequestDispatcher {
 	
 	@GetMapping("/login")
-    String getLogin() {
+    public String login() {
       return "login";
     }
 	
+	@GetMapping("/register")
+	public String register() {
+		return "register";
+	}
+	
+	/*
 	@GetMapping
 	String index() {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -29,16 +35,21 @@ public class RequestDispatcher {
 		}
 		
 		return "applicant/index";
+	}*/
+	
+	@GetMapping("/")
+	public String index() {
+		return "applicant/index";
 	}
 	
 	@GetMapping("/applicant")
 	String applicant() {
-		return("<h1>Hello Applicant</h1>");
+		return "applicant/index";
 	}
 	
 	@GetMapping("/recruiter")
 	String recruiter() {
-		return("<h1>Hello Recruiter</h1>");
+		return "recruiter/index";
 	}
 	
 }

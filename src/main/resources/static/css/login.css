@@ -4,13 +4,20 @@
 	align-items: center;
 	height: 100%;
 }
-form.login-form{
+.message-body{
+	padding: 0.75rem 1.5rem !important;
+	margin-bottom: 1rem !important;
+}
+div.login-form{
 	width: 20rem;
 	height: 30rem;
 }
-form.register-form{
-	width: 30rem;
+div.register-form{
+	width: 40rem;
 	height: 38rem;
+}
+div.flex-container > div{
+	padding-top: 0 !important;
 }
 .label{
 	color: #363636;
@@ -25,7 +32,7 @@ div.form-title{
 button.login-button{
 	width: 100%;
 }
-button.register-button{
+a.register-button{
 	margin-top: 1.5rem;
 }
 input[type="date"]::-webkit-clear-button {
