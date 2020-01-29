@@ -32,12 +32,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .antMatchers("/css/**").permitAll()
             .antMatchers("/").authenticated()
             .antMatchers("/recruiter").hasRole("RECRUITER")
-            .antMatchers("/applicant").hasRole("APPLICANT")
+            //.antMatchers("/applicant").hasRole("APPLICANT")
             .anyRequest().authenticated()
             .and()
         .formLogin().loginPage("/login").permitAll()
             .and()
-        .logout().clearAuthentication(true).logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login")
-        .deleteCookies("JSESSIONID").invalidateHttpSession(true);
+            .logout()
+            .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))            
+            .logoutSuccessUrl("/login")
+            .invalidateHttpSession(true)        // set invalidation state when logout
+            .deleteCookies("JSESSIONID");
+    }
+    
+    @Bean
+    public PasswordEncoder getPasswordEncoder() {
+        return NoOpPasswordEncoder.getInstance();
     }
 }

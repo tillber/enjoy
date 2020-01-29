@@ -22,6 +22,7 @@ public class RequestDispatcher {
 		return "register";
 	}
 	
+	/*
 	@GetMapping
 	String index() {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -33,6 +34,11 @@ public class RequestDispatcher {
 			}
 		}
 		
+		return "applicant/index";
+	}*/
+	
+	@GetMapping("/")
+	public String index() {
 		return "applicant/index";
 	}
 	
