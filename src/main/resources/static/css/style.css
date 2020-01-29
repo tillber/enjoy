@@ -24,6 +24,9 @@ div.flex-container > div{
 	padding-top: 1rem;
 	padding-right: 1rem;
 }
+div.flex-container > div:last-child{
+	padding-right: 0;
+}
 .label{
 	font-size: 0.9rem !important;
 	font-weight: 500 !important;

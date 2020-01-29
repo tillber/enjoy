@@ -13,9 +13,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class RequestDispatcher {
 	
 	@GetMapping("/login")
-    String getLogin() {
+    public String login() {
       return "login";
     }
+	
+	@GetMapping("/register")
+	public String register() {
+		return "register";
+	}
 	
 	@GetMapping
 	String index() {
