@@ -17,6 +17,13 @@
 <p class="subtitle is-6">Java REST Web App deployed on Heroku</p>-->
 <img src="https://ssl.gstatic.com/images/branding/product/2x/avatar_circle_blue_48dp.png"/>
 </div>
+<div th:if="${param.error}" class="alert alert-error">    
+    <article class="message is-danger">
+  <div class="message-body">
+    Bad credentials!
+  </div>
+</article>
+</div>
 <div class="field">
   <div class="control">
     <input class="input" type="text" placeholder="Username" name="username" required>

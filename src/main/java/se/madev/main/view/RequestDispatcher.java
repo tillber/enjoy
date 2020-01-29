@@ -33,12 +33,12 @@ public class RequestDispatcher {
 	
 	@GetMapping("/applicant")
 	String applicant() {
-		return("<h1>Hello Applicant</h1>");
+		return "applicant/index";
 	}
 	
 	@GetMapping("/recruiter")
 	String recruiter() {
-		return("<h1>Hello Recruiter</h1>");
+		return "recruiter/index";
 	}
 	
 }

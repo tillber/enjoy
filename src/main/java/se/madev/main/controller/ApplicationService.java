@@ -17,8 +17,8 @@ public class ApplicationService {
 		repository = new DBHandler();
 	}
 	
-	public Authentication authenticate(Authentication authentication) throws IncorrectPasswordException, UserDoesNotExistException {
-		String username = authentication.getName();
+	/*public Authentication authenticate(Authentication authentication) throws IncorrectPasswordException, UserDoesNotExistException {
+		/*String username = authentication.getName();
 		String password = authentication.getCredentials().toString();
 		if(new User(username, password).equals(new User("hello", "world"))) {
 			return new UsernamePasswordAuthenticationToken(username, password, Collections.emptyList());
@@ -29,6 +29,6 @@ public class ApplicationService {
 			
 	    } catch(UserDoesNotExistException exception) {
 			throw exception;
-		}*/
-	}
+		}
+	}*/
 }

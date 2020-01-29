@@ -4,6 +4,10 @@
 	align-items: center;
 	height: 100%;
 }
+.message-body{
+	padding: 0.75rem 1.5rem !important;
+	margin-bottom: 1rem !important;
+}
 form.login-form{
 	width: 20rem;
 	height: 30rem;
