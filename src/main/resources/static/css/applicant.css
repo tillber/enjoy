@@ -10,3 +10,7 @@ tr td:last-child{
 tr:empty:before{
 	content: "Empty";
 }
+div.send-application{
+	text-align: right;
+	padding-bottom: 2rem;
+}

@@ -9,47 +9,77 @@
 <link rel="stylesheet" href="../../static/css/applicant.css"/>
 <link rel="stylesheet" href="../../static/css/style.css"/>
 <link rel="stylesheet" th:href="@{/css/style.css}"/>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script th:src="@{/js/applicant.js}"></script>
-<script src="../../static/js/applicant.js"></script>
+
 <!-- Bulma.io CSS Framework CDN -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.8.0/css/bulma.min.css" integrity="sha256-D9M5yrVDqFlla7nlELDaYZIpXfFWDytQtiV+TaH6F1I=" crossorigin="anonymous" />
-<!-- FontsAwesome -->
+
+<!-- FontsAwesome CDN-->
 <script src="https://kit.fontawesome.com/cf38924cc4.js" crossorigin="anonymous"></script>
+
+<!--  JQuery CDN -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<script src="../../static/js/applicant.js"></script>
+<script th:src="@{/js/applicant.js}"></script>
 </head>
 <body>
 <div th:replace="fragments/navbar"></div>
 <div class="area">
-<article class="message is-warning">
-  <div class="message-body">
-    <b>You have not posted your application.</b> Please fill in your profile below and provide us with information about your experience and availability, and then submit your application. 
+<div th:switch="${application.status}">
+  <div th:case="#{status.submitted}">
+  	<article class="message is-link">
+	  <div class="message-body">
+	    <b>We have received your application. </b> Your application will be processed by one of our recruiters, and you will hear from us soon. Good luck!
+	  </div>
+	</article>
   </div>
-</article>
+  <div th:case="#{status.accepted}">
+  	<article class="message is-primary">
+	  <div class="message-body">
+	    <b>Your application has been accepted!</b> Congratulations, your application has been accepted. A recruiter will contact you soon with further information and details.
+	  </div>
+	</article>
+  </div>
+  <div th:case="#{status.rejected}">
+  <article class="message is-danger">
+	  <div class="message-body">
+	    <b>Your application was rejected.</b> We are sorry to tell you that your application has been rejected.
+	  </div>
+	</article>
+  </div>
+  <div th:case="*">
+  	<article class="message is-warning">
+	  <div class="message-body">
+	    <b>You have not posted your application.</b> Please fill in your profile below and provide us with information about your experience and availability, and then submit your application.
+	  </div>
+	</article>
+  </div>
+</div>
 <hr>
 <h6 class="subtitle is-6">Personal information</h6>
 <div class="flex-container">
 <div class="field">
 	  <label class="label">First name</label>
 	  <div class="control">
-	    <input class="input" type="text" value="Martin">
+	    <input class="input" type="text" value="Martin" readonly>
 	  </div>
 	</div>
 <div class="field">
 	  <label class="label">Last name</label>
 	  <div class="control">
-	    <input class="input" type="text" value="Tillberg">
+	    <input class="input" type="text" value="Tillberg" readonly>
 	  </div>
 	</div>
 <div class="field">
 	  <label class="label">Email</label>
 	  <div class="control">
-	    <input class="input" type="email" value="tillber@kth.se">
+	    <input class="input" type="email" value="tillber@kth.se" readonly>
 	  </div>
 	</div>
 <div class="field">
 	  <label class="label">Date of birth</label>
 	  <div class="control">
-	    <input class="input" type="date">
+	    <input class="input" type="date" readonly>
 	  </div>
 	</div>
 </div>
@@ -143,6 +173,10 @@
 			</tbody>
 		</table>
 		</div>
+</div>
+<hr>
+<div class="send-application">
+  <button class="button is-link" id="show-modal">Confirm application</button>
 </div>
 </div>
 </body>
