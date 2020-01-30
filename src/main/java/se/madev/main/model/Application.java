@@ -4,14 +4,7 @@ public class Application {
 	private Applicant applicant;
 	private Experience[] experiences;
 	private Availability[] availabilities;
-	private boolean processed;
-	
-	public Application(Applicant applicant, Experience[] experiences, Availability[] availabilities, boolean processed) {
-		this.applicant = applicant;
-		this.experiences = experiences;
-		this.availabilities = availabilities;
-		this.processed = processed;
-	}
+	private boolean accepted;
 
 	public Applicant getApplicant() {
 		return applicant;
@@ -37,11 +30,11 @@ public class Application {
 		this.availabilities = availabilities;
 	}
 
-	public boolean isProcessed() {
-		return processed;
+	public boolean isAccepted() {
+		return accepted;
 	}
 
-	public void setProcessed(boolean processed) {
-		this.processed = processed;
+	public void setAccepted(boolean accepted) {
+		this.accepted = accepted;
 	}
 }

@@ -19,6 +19,9 @@
 <!--  JQuery CDN -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
+<!-- Favicon  -->
+<link rel="shortcut icon" type="image/x-icon" th:href="@{/images/favicon.ico}" />
+
 <script src="../../static/js/applicant.js"></script>
 <script th:src="@{/js/applicant.js}"></script>
 </head>
@@ -133,6 +136,7 @@
 </div>
 <hr>
 <h6 class="subtitle is-6">Availability</h6>
+<form id="avail-form">
 <div class="flex-container">
 	<div class="field">
 		<label class="label">From</label>
@@ -149,10 +153,11 @@
 	<div class="field">
 		<label class="label">	&nbsp;</label>
 		<div class="control">
-			<button class="button" id="add-avail">Add period</button>
+			<input type="submit" class="button" value="Add period"/>
 		</div>
 	</div>
 </div>
+</form>
 <div class="flex-container">
 <div>
 	<table class="table is-fullwidth" id="avail-table">

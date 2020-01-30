@@ -1,7 +1,6 @@
 package se.madev.main.integration;
 
 import se.madev.main.model.User;
-import se.madev.main.model.UserDoesNotExistException;
 
 public class DBHandler {
 	
@@ -9,7 +8,7 @@ public class DBHandler {
 		
 	}
 	
-	public User getUser(String username) throws UserDoesNotExistException{
+	public User getUser(String username){
 		return null;
 	}
 }
