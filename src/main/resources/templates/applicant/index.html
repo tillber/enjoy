@@ -8,7 +8,9 @@
 <link rel="stylesheet" th:href="@{/css/style.css}"/>
 <link rel="stylesheet" href="../../static/css/applicant.css"/>
 <link rel="stylesheet" href="../../static/css/style.css"/>
+<link rel="stylesheet" href="../../static/css/bulma-steps/bulma-steps.min.css"/>
 <link rel="stylesheet" th:href="@{/css/style.css}"/>
+<link rel="stylesheet" th:href="@{/css/bulma-steps/bulma-steps.min.css}"/>
 
 <!-- Bulma.io CSS Framework CDN -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.8.0/css/bulma.min.css" integrity="sha256-D9M5yrVDqFlla7nlELDaYZIpXfFWDytQtiV+TaH6F1I=" crossorigin="anonymous" />
@@ -19,8 +21,9 @@
 <!--  JQuery CDN -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-<!-- Favicon  -->
-<link rel="shortcut icon" type="image/x-icon" th:href="@{/images/favicon.ico}" />
+<script src="../../static/js/bulma-steps/bulma-steps.js"></script>
+<script th:src="@{/js/bulma-steps/bulma-steps.js}"></script>
+<script> bulmaSteps.attach(); </script>
 
 <script src="../../static/js/applicant.js"></script>
 <script th:src="@{/js/applicant.js}"></script>
@@ -28,36 +31,66 @@
 <body>
 <div th:replace="fragments/navbar"></div>
 <div class="area">
+<div class="steps is-small">
+  <div class="step-item is-active">
+    <div class="step-marker">
+      <i class="fas fa-check"></i>
+    </div>
+    <div class="step-details is-active">
+      <p class="step-title">Application</p>
+      <p class="step-text">The first step of the recruitment process is to send in your application. Please provide us with some information below, and then submit your application.</p>
+    </div>
+  </div>
+  <div class="step-item">
+    <div class="step-marker">
+    	<i class="fas fa-check"></i>
+    </div>
+    <div class="step-details">
+      <p class="step-title">Examination</p>
+      <p class="step-text">During the second step, your application will be processed and reviewed by a recruiter who will take a look at and examine your experiences.</p>
+    </div>
+  </div>
+  <div class="step-item">
+    <div class="step-marker">
+    	<i class="fas fa-check"></i>
+    </div>
+    <div class="step-details">
+      <p class="step-title">Decision</p>
+      <p class="step-text">After that we have examined your application, a recruiter will contact you to tell you about our decision (rejected or accepted) of your application. </p>
+    </div>
+  </div>
+</div>
 <div th:switch="${application.status}">
   <div th:case="#{status.submitted}">
-  	<article class="message is-link">
+  	<article class="message is-link is-small">
 	  <div class="message-body">
 	    <b>We have received your application. </b> Your application will be processed by one of our recruiters, and you will hear from us soon. Good luck!
 	  </div>
 	</article>
   </div>
   <div th:case="#{status.accepted}">
-  	<article class="message is-primary">
+  	<article class="message is-primary is-small">
 	  <div class="message-body">
 	    <b>Your application has been accepted!</b> Congratulations, your application has been accepted. A recruiter will contact you soon with further information and details.
 	  </div>
 	</article>
   </div>
   <div th:case="#{status.rejected}">
-  <article class="message is-danger">
+  <article class="message is-danger is-small">
 	  <div class="message-body">
 	    <b>Your application was rejected.</b> We are sorry to tell you that your application has been rejected.
 	  </div>
 	</article>
   </div>
   <div th:case="*">
-  	<article class="message is-warning">
+  	<article class="message is-warning is-small	">
 	  <div class="message-body">
 	    <b>You have not posted your application.</b> Please fill in your profile below and provide us with information about your experience and availability, and then submit your application.
 	  </div>
 	</article>
   </div>
 </div>
+<h5 class="title is-5 application-title">Your application</h5>
 <hr>
 <h6 class="subtitle is-6">Personal information</h6>
 <div class="flex-container">
@@ -181,7 +214,7 @@
 </div>
 <hr>
 <div class="send-application">
-  <button class="button is-link">Confirm application</button>
+  <button class="button is-link">Send application</button>
 </div>
 </div>
 </body>

@@ -14,3 +14,11 @@ div.send-application{
 	text-align: right;
 	padding-bottom: 2rem;
 }
+p.step-text{
+	font-size: 0.85rem;
+	width: 20rem;
+	margin: auto;
+}
+.application-title{
+	margin-top: 2rem;
+}
