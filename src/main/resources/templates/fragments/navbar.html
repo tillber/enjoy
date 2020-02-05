@@ -13,14 +13,14 @@
     </div>
     <div class="navbar-menu">
     <div class="navbar-end">
-	    <div class="navbar-item has-dropdown is-hoverable">
-        <span class="navbar-link">
-          Logged in as&nbsp;<b><span sec:authentication="name">NOT FOUND</span></b>
-        </span>
-        <div class="navbar-dropdown is-boxed">
-          <a class="navbar-item" th:href="@{/logout}">
-            Logout
-          </a>
+    <div class="navbar-item">
+    	<span sec:authentication="name">NOT FOUND</span>
+    </div>
+      <div class="navbar-item">
+        <div class="field">
+          <p class="control">
+            <a class="button is-danger is-outlined is-small" th:href="@{/logout}">Logout</a>
+          </p>
         </div>
       </div>
     </div>

@@ -6,9 +6,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 
 import se.madev.main.integration.DBHandler;
-import se.madev.main.model.IncorrectPasswordException;
 import se.madev.main.model.User;
-import se.madev.main.model.UserDoesNotExistException;
 
 public class ApplicationService {
 	DBHandler repository;
