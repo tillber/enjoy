@@ -7,6 +7,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 
 @Entity
 @Table(name="users")
@@ -34,6 +36,8 @@ public class User implements Serializable{
     @Column(name="dateOfBirth")
     private Date dateOfBirth;
     
+    @Min(0) //id = 0 -> applicant?
+    @Max(1) //id = 1 -> recruiter?
     @Column(name="role")
     private int role;
 
