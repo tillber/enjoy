@@ -1,0 +1,29 @@
+<div class="steps is-small">
+  <div class="step-item" th:classappend="${applied} ? is-completed : is-active">
+    <div class="step-marker">
+      <i class="fas fa-check"></i>
+    </div>
+    <div class="step-details">
+      <p class="step-title">Application</p>
+      <p class="step-text">The first step of the recruitment process is to send in your application. Please provide us with some information below, and then submit your application.</p>
+    </div>
+  </div>
+  <div class="step-item" th:classappend="${applied} ? is-active">
+    <div class="step-marker">
+    	<i class="fas fa-check"></i>
+    </div>
+    <div class="step-details">
+      <p class="step-title">Examination</p>
+      <p class="step-text">During the second step, your application will be processed and reviewed by a recruiter who will take a look at and examine your experiences.</p>
+    </div>
+  </div>
+  <div class="step-item">
+    <div class="step-marker">
+    	<i class="fas fa-check"></i>
+    </div>
+    <div class="step-details">
+      <p class="step-title">Decision</p>
+      <p class="step-text">After that we have examined your application, a recruiter will contact you to tell you about our decision (rejected or accepted) of your application. </p>
+    </div>
+  </div>
+</div>

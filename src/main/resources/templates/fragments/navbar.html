@@ -14,7 +14,7 @@
     <div class="navbar-menu">
     <div class="navbar-end">
     <div class="navbar-item">
-    	<span sec:authentication="name">NOT FOUND</span>
+    	<p th:text="${user.firstName}">NOT FOUND</p>
     </div>
       <div class="navbar-item">
         <div class="field">

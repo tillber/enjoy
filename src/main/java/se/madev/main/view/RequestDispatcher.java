@@ -6,8 +6,12 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import se.madev.main.model.MyUserDetails;
+import se.madev.main.model.User;
 
 @Controller
 public class RequestDispatcher {
@@ -38,7 +42,9 @@ public class RequestDispatcher {
 	}*/
 	
 	@GetMapping("/")
-	public String index() {
+	public String index(Model model) {
+		model.addAttribute("user", (MyUserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+		model.addAttribute("applied", false);
 		return "applicant/index";
 	}
 	

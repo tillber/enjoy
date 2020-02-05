@@ -16,10 +16,10 @@ public class User implements Serializable{
     @Column(name="id")
     private int id;
     
-    @Column(name="firstName")
+    @Column(name="firstname")
     private String firstName;
     
-    @Column(name="lastName")
+    @Column(name="lastname")
     private String lastName;
     
     @Column(name="email")
@@ -31,7 +31,7 @@ public class User implements Serializable{
     @Column(name="password")
     private String password;
     
-    @Column(name="dateOfBirth")
+    @Column(name="dateofbirth")
     private Date dateOfBirth;
     
     @Column(name="role")
