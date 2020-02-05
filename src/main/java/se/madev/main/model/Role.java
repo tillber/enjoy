@@ -7,7 +7,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "role")
 public class Role {
 	@Id
 	private long id;
