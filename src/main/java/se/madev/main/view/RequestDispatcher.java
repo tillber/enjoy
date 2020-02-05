@@ -27,21 +27,6 @@ public class RequestDispatcher {
 		return "register";
 	}
 	
-	/*
-	@GetMapping
-	String index() {
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		Collection<GrantedAuthority> authorities = (Collection<GrantedAuthority>) authentication.getAuthorities();
-		
-		for (GrantedAuthority authority : authorities) {
-			if(authority.getAuthority().equals("RECRUITER")) {
-				return "recruiter/index";
-			}
-		}
-		
-		return "applicant/index";
-	}*/
-	
 	@GetMapping("/")
 	public String index(Model model) {
 		model.addAttribute("user", (MyUserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal());
