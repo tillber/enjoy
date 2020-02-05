@@ -36,14 +36,10 @@ public class DatabaseTest{
     	newUser.setPassword("1234");
     	newUser.setEmail("test@testmail.com");
     	newUser.setRole(role);
-    	newUser.setId(2);
     	newUser.setDateOfBirth(new Date(0));
     	
     	testUserEntityManager.persist(newUser);
     	testUserEntityManager.flush();
-    	
-    	MyUserDetails testDetails = new MyUserDetails(newUser);
-    	System.out.println("User authorities: "+testDetails.getAuthorities().toString());
     }
     
     @Test
@@ -61,6 +57,7 @@ public class DatabaseTest{
     	assertThat(foundUser.getRole()).isEqualTo(newUser.getRole());
     	assertThat(foundUser.getId()).isEqualTo(newUser.getId());
     	assertThat(foundUser.getDateOfBirth()).isEqualTo(newUser.getDateOfBirth());
+    	
     }
     
     @Test
