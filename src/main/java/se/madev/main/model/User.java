@@ -6,6 +6,11 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -34,8 +39,8 @@ public class User implements Serializable{
     @Column(name="dateofbirth")
     private Date dateOfBirth;
     
-    @Column(name="role")
-    private int role;
+    @Column(name = "role")
+    private Role role;
 
 	public int getId() {
 		return id;
@@ -93,11 +98,11 @@ public class User implements Serializable{
 		this.dateOfBirth = dateOfBirth;
 	}
 
-	public int getRole() {
+	public Role getRole() {
 		return role;
 	}
 
-	public void setRole(int role) {
+	public void setRole(Role role) {
 		this.role = role;
 	}
 }
