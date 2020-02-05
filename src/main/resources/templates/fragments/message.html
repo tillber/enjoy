@@ -1,19 +1,19 @@
-<div th:switch="${application.status}">
-  <div th:case="#{status.applied}">
+<div th:switch="${status}">
+  <div th:case="'APPLIED'">
   	<article class="message is-link is-small">
 	  <div class="message-body">
 	    <b>We have received your application. </b> Your application will be processed by one of our recruiters, and you will hear from us soon. Good luck!
 	  </div>
 	</article>
   </div>
-  <div th:case="#{status.accepted}">
+  <div th:case="'ACCEPTED'">
   	<article class="message is-primary is-small">
 	  <div class="message-body">
 	    <b>Your application has been accepted!</b> Congratulations, your application has been accepted. A recruiter will contact you soon with further information and details.
 	  </div>
 	</article>
   </div>
-  <div th:case="#{status.rejected}">
+  <div th:case="'REJECTED'">
   <article class="message is-danger is-small">
 	  <div class="message-body">
 	    <b>Your application was rejected.</b> We are sorry to tell you that your application has been rejected.

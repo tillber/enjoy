@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import se.madev.main.model.ApplicationStatus;
 import se.madev.main.model.MyUserDetails;
 import se.madev.main.model.User;
 
@@ -44,7 +45,6 @@ public class RequestDispatcher {
 	@GetMapping("/")
 	public String index(Model model) {
 		model.addAttribute("user", (MyUserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal());
-		model.addAttribute("applied", false);
 		return "applicant/index";
 	}
 	
