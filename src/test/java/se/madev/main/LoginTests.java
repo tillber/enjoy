@@ -3,7 +3,10 @@ package se.madev.main;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestBuilders.formLogin;
 import static org.springframework.security.test.web.servlet.response.SecurityMockMvcResultMatchers.authenticated;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.cookie;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -34,17 +37,17 @@ public class LoginTests {
 	@Test
 	public void loginWithTrueCredentials() throws Exception {
 		RequestBuilder req = formLogin("/login").user("admin").password("root"); 		//enter correct user credentials
-		mvc.perform(req).andExpect(redirectedUrl("/")) 									//expect to be redirected to index page after login
-		.andExpect(status().isFound()) 													//expect page to be found (Code 302)
+		mvc.perform(req).andDo(print()).andExpect(redirectedUrl("/")) 					//expect to be redirected to index page after login
+		.andExpect(status().isFound()) 													//expect page to be found (Status 302)
 		.andExpect(content().string(containsString(LOGIN_SUCCESS))) 					//expect response body to contain empty string
-		.andExpect(authenticated().withUsername("admin")); 													//expect the user to be authenticated
+		.andExpect(authenticated().withUsername("admin"));								//expect the user to be authenticated
 	}
 	
 	@Test
 	public void loginWithFalseCredentials() throws Exception {
 		RequestBuilder req = formLogin("/login").user("badmin").password("broot"); 		//enter false user credentials
 		mvc.perform(req).andExpect(redirectedUrl(LOGIN_ERROR)) 							//expect to be redirected to error page
-		.andExpect(status().isFound()); 												//expect page to be found (COde 302)
+		.andExpect(status().isFound());													//expect page to be found (Status 302)
 	}
 	
 	@Test 
