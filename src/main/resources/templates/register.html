@@ -6,16 +6,13 @@
 <!-- CSS Files -->
 <link rel="stylesheet" th:href="@{/css/login.css}"/>
 <link rel="stylesheet" th:href="@{/css/style.css}"/>
-<link rel="stylesheet" href="../static/css/applicant.css"/>
-<link rel="stylesheet" href="../static/css/style.css"/>
-<link rel="stylesheet" href="../static/css/login.css"/>
 <!-- Bulma.io CSS Framework CDN -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.8.0/css/bulma.min.css" integrity="sha256-D9M5yrVDqFlla7nlELDaYZIpXfFWDytQtiV+TaH6F1I=" crossorigin="anonymous" />
 </head>
 <body>
 <div class="container">
 <div class="register-form">
-<form method="post" th:action="@{/login}">
+<form action="#" th:action="@{/register}" th:object="${user}" method="post">
 <div class="form-title">
 <img src="https://ssl.gstatic.com/images/branding/product/2x/avatar_circle_blue_48dp.png"/>
 </div>
@@ -23,40 +20,40 @@
 <div class="field">
   <label class="label">First name</label>
   <div class="control">
-    <input class="input" type="text" required>
+    <input class="input" type="text" th:field="*{firstName}" name="first-name" required>
   </div>
 </div>
 <div class="field">
   <label class="label">Last name</label>
   <div class="control">
-    <input class="input" type="text" required>
+    <input class="input" type="text" th:field="*{lastName}" name="last-name" required>
   </div>
 </div>
 </div>
 <div class="field">
   <label class="label">Email</label>
   <div class="control">
-    <input class="input" type="email" required>
+    <input class="input" type="email" th:field="*{email}" name="email" required>
   </div>
 </div>
 <div class="flex-container">
 <div class="field">
   <label class="label">Username</label>
   <div class="control">
-    <input class="input" type="text" required>
+    <input class="input" type="text" th:field="*{username}" name="username" required>
   </div>
 </div>
 <div class="field">
   <label class="label">Password</label>
   <div class="control">
-    <input class="input" type="password" required>
+    <input class="input" type="password" th:field="*{password}" name="password" required>
   </div>
 </div>
 </div>
 <div class="field">
   <label class="label">Date of birth</label>
   <div class="control">
-    <input class="input" type="date" required>
+    <input class="input" type="date" th:field="*{dateOfBirth}" name="birth-date" required>
   </div>
 </div>
 <div class="control">

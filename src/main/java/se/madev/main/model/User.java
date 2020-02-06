@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 @Table(name="users")
 public class User implements Serializable{
@@ -35,6 +37,7 @@ public class User implements Serializable{
     @Column(name="password")
     private String password;
     
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name="dateofbirth")
     private Date dateOfBirth;
     
@@ -104,5 +107,12 @@ public class User implements Serializable{
 
 	public void setRole(Role role) {
 		this.role = role;
+	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
+				+ ", username=" + username + ", password=" + password + ", dateOfBirth=" + dateOfBirth + ", role="
+				+ role + "]";
 	}
 }

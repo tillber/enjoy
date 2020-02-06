@@ -1,18 +1,18 @@
 package se.madev.main.view;
 
-import java.util.Collection;
-
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import se.madev.main.model.MyUserDetails;
+import se.madev.main.model.User;
 
 @Controller
 public class RequestDispatcher {
@@ -23,14 +23,22 @@ public class RequestDispatcher {
     }
 	
 	@GetMapping("/register")
-	public String register() {
+	public String getRegister(Model model) {
+		model.addAttribute("user", new User());
 		return "register";
+	}
+	
+	@PostMapping("/register")
+	public String postRegister(@ModelAttribute("user") User user, BindingResult result) {
+		System.err.println(user.toString());
+		return "login";
 	}
 	
 	@GetMapping("/")
 	public String index(Model model, HttpServletRequest httpServletRequest) {
 		MyUserDetails user = (MyUserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		model.addAttribute("user", user);
+		
 		if(httpServletRequest.isUserInRole("APPLICANT")) {
 			return "applicant/index";
         } else {
