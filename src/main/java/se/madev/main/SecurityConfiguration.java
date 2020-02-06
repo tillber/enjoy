@@ -3,17 +3,14 @@ package se.madev.main;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-import se.madev.main.integration.UserRepository;
 import se.madev.main.model.MyUserDetailsService;
 
 @EnableWebSecurity
@@ -48,8 +45,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .deleteCookies("JSESSIONID");
     }
     
+    //WARNIG!
+    //BCrypt algorithm generates a String of length 50
+    //so we need to make sure that the password will be stored in a column that can accommodate it.
+    //Also, only encode a password once due to each call will generate a different salt
     @Bean
     public PasswordEncoder getPasswordEncoder() {
-        return NoOpPasswordEncoder.getInstance();
+    	return new Pbkdf2PasswordEncoder("secret", 10000, 50);
     }
 }

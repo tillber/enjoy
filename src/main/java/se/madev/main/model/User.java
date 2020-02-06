@@ -18,11 +18,7 @@ import javax.validation.constraints.Min;
 public class User implements Serializable{
 
     @Id
-<<<<<<< HEAD
     @GeneratedValue //generate a unique id starting from
-=======
-    @GeneratedValue
->>>>>>> 9c0f47169e5aa95ebbac67798841af680b6e2046
     @Column(name="id")
     private int id;
     
@@ -44,16 +40,11 @@ public class User implements Serializable{
     @Column(name="dateofbirth")
     private Date dateOfBirth;
     
-<<<<<<< HEAD
-    @Min(0) //id = 0 -> applicant?
-    @Max(1) //id = 1 -> recruiter?
-    @Column(name="role")
-    private int role;
-=======
+//    @Min(1)
+//    @Max(2)
     @ManyToOne
     @JoinColumn(name = "role")
     private Role role;
->>>>>>> 9c0f47169e5aa95ebbac67798841af680b6e2046
 
 	public int getId() {
 		return id;
