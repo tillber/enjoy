@@ -1,16 +1,18 @@
 package se.madev.main.model;
 
 public class Application {
-	private Applicant applicant;
+	private User applicant;
 	private Experience[] experiences;
 	private Availability[] availabilities;
 	private boolean accepted;
+	
+	//commitcheck
 
-	public Applicant getApplicant() {
+	public User getApplicant() {
 		return applicant;
 	}
 
-	public void setApplicant(Applicant applicant) {
+	public void setApplicant(User applicant) {
 		this.applicant = applicant;
 	}
 

@@ -7,6 +7,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -16,14 +18,18 @@ import javax.validation.constraints.Min;
 public class User implements Serializable{
 
     @Id
+<<<<<<< HEAD
     @GeneratedValue //generate a unique id starting from
+=======
+    @GeneratedValue
+>>>>>>> 9c0f47169e5aa95ebbac67798841af680b6e2046
     @Column(name="id")
     private int id;
     
-    @Column(name="firstName")
+    @Column(name="firstname")
     private String firstName;
     
-    @Column(name="lastName")
+    @Column(name="lastname")
     private String lastName;
     
     @Column(name="email")
@@ -35,13 +41,19 @@ public class User implements Serializable{
     @Column(name="password")
     private String password;
     
-    @Column(name="dateOfBirth")
+    @Column(name="dateofbirth")
     private Date dateOfBirth;
     
+<<<<<<< HEAD
     @Min(0) //id = 0 -> applicant?
     @Max(1) //id = 1 -> recruiter?
     @Column(name="role")
     private int role;
+=======
+    @ManyToOne
+    @JoinColumn(name = "role")
+    private Role role;
+>>>>>>> 9c0f47169e5aa95ebbac67798841af680b6e2046
 
 	public int getId() {
 		return id;
@@ -99,11 +111,11 @@ public class User implements Serializable{
 		this.dateOfBirth = dateOfBirth;
 	}
 
-	public int getRole() {
+	public Role getRole() {
 		return role;
 	}
 
-	public void setRole(int role) {
+	public void setRole(Role role) {
 		this.role = role;
 	}
 }
