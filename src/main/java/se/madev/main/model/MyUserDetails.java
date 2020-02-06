@@ -31,14 +31,14 @@ public class MyUserDetails implements UserDetails {
         this.lastName = user.getLastName();
         this.email = user.getEmail();
         this.dateOfBirth = user.getDateOfBirth();
-        //this.role = user.getRole();
+        this.role = user.getRole();
         
         this.active = true;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"));
+        return Arrays.asList(new SimpleGrantedAuthority(getRole().toString()));
     }
 
     @Override
@@ -67,10 +67,9 @@ public class MyUserDetails implements UserDetails {
     	return dateOfBirth;
     }
     
-    /*
     public Role getRole() {
     	return role;
-    }*/
+    }
 
     @Override
     public boolean isAccountNonExpired() {
