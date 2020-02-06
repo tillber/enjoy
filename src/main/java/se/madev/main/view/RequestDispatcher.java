@@ -1,18 +1,12 @@
 package se.madev.main.view;
 
-import java.util.Collection;
-
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-import se.madev.main.model.ApplicationStatus;
 import se.madev.main.model.MyUserDetails;
-import se.madev.main.model.User;
 
 @Controller
 public class RequestDispatcher {
@@ -29,7 +23,9 @@ public class RequestDispatcher {
 	
 	@GetMapping("/")
 	public String index(Model model) {
-		model.addAttribute("user", (MyUserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+		MyUserDetails user = (MyUserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		System.err.println(user.getRole().toString());
+		model.addAttribute("user", user);
 		return "applicant/index";
 	}
 	
@@ -43,4 +39,8 @@ public class RequestDispatcher {
 		return "recruiter/index";
 	}
 	
+	@RequestMapping("/exceptions/403")
+	public String accessDenied() {
+	    return "exceptions/403";
+	}
 }

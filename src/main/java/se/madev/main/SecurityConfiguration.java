@@ -35,8 +35,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         	.antMatchers("/register").permitAll()
             .antMatchers("/css/**").permitAll()
             .antMatchers("/").authenticated()
-            .antMatchers("/recruiter").hasRole("RECRUITER")
-            //.antMatchers("/applicant").hasRole("APPLICANT")
+            .antMatchers("/recruiter/**").hasRole("RECRUITER")
+            .antMatchers("/applicant/**").hasRole("APPLICANT")
             .anyRequest().authenticated()
             .and()
         .formLogin().loginPage("/login").permitAll()
@@ -45,7 +45,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))            
             .logoutSuccessUrl("/login")
             .invalidateHttpSession(true)        // set invalidation state when logout
-            .deleteCookies("JSESSIONID");
+            .deleteCookies("JSESSIONID")
+            .and().exceptionHandling().accessDeniedPage("/exceptions/403");
     }
     
     @Bean
