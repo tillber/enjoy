@@ -1,4 +1,4 @@
-package se.madev.main.model;
+package se.madev.main.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -7,11 +7,13 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import se.madev.main.integration.UserRepository;
+import se.madev.main.model.MyUserDetails;
+import se.madev.main.model.User;
 
 
 
 @Service
-public class MyUserDetailsService implements UserDetailsService {
+public class UserService implements UserDetailsService {
 
    @Autowired
    UserRepository userRepository;

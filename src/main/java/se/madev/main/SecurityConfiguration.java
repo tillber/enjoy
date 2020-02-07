@@ -13,15 +13,16 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+import se.madev.main.controller.UserService;
 import se.madev.main.integration.UserRepository;
-import se.madev.main.model.MyUserDetailsService;
+import se.madev.main.model.Role;
 
 @EnableWebSecurity
 @Configuration
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
-    MyUserDetailsService userDetailsService;
+    UserService userDetailsService;
 
 	@Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -35,8 +36,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         	.antMatchers("/register").permitAll()
             .antMatchers("/css/**").permitAll()
             .antMatchers("/").authenticated()
-            .antMatchers("/recruiter/**").hasRole("RECRUITER")
-            .antMatchers("/applicant/**").hasRole("APPLICANT")
+            .antMatchers("/recruiter/**").hasRole("APPLICANT")
+            .antMatchers("/applicant/**").hasRole("RECRUITER")
             .anyRequest().authenticated()
             .and()
         .formLogin().loginPage("/login").permitAll()

@@ -3,13 +3,16 @@ package se.madev.main.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -18,23 +21,28 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class User implements Serializable{
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
     private int id;
     
     @Column(name="firstname")
+    @NotBlank(message = "First name is mandatory")
     private String firstName;
     
     @Column(name="lastname")
+    @NotBlank(message = "Last name is mandatory")
     private String lastName;
     
     @Column(name="email")
+    @NotBlank(message = "Email is mandatory")
     private String email;
 
     @Column(name="username")
+    @NotBlank(message = "Username is mandatory")
     private String username;
 
     @Column(name="password")
+    @NotBlank(message = "Password is mandatory")
     private String password;
     
     @DateTimeFormat(pattern = "yyyy-MM-dd")

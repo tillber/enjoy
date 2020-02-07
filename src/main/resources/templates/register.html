@@ -16,6 +16,15 @@
 <div class="form-title">
 <img src="https://ssl.gstatic.com/images/branding/product/2x/avatar_circle_blue_48dp.png"/>
 </div>
+<div th:if="${errors}" class="alert alert-error">
+	<article class="message is-danger">
+		<div class="message-body">
+			<div th:each="error: ${errors}">
+		    	<p th:text="${error}"/>
+			</div>
+		</div>
+	</article>
+</div>
 <div class="flex-container">
 <div class="field">
   <label class="label">First name</label>
