@@ -20,9 +20,8 @@ public class MyUserDetails implements UserDetails {
     private String email;
     private Date dateOfBirth;
     private Role role;
-    
     private boolean active;
-    private List<GrantedAuthority> authorities;
+
 
     public MyUserDetails(User user) {
         this.username = user.getUsername();
@@ -32,13 +31,13 @@ public class MyUserDetails implements UserDetails {
         this.email = user.getEmail();
         this.dateOfBirth = user.getDateOfBirth();
         this.role = user.getRole();
-        
-        this.active = true;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
+
         return Arrays.asList(new SimpleGrantedAuthority(getRole().toString()));
+
     }
 
     @Override
@@ -89,5 +88,18 @@ public class MyUserDetails implements UserDetails {
     @Override
     public boolean isEnabled() {
         return active;
+    }
+
+    public String translateRole(int roleID){
+        switch(roleID){
+            case 1:{
+                return new String("ROLE_RECRUITER");
+            }
+            case 2:{
+                return new String ("ROLE_APPLICANT");
+            }
+
+        }
+        return null;
     }
 }

@@ -3,6 +3,7 @@ package se.madev.main.model;
 import java.io.Serializable;
 import java.util.Date;
 
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -108,11 +110,11 @@ public class User implements Serializable{
 	public void setRole(Role role) {
 		this.role = role;
 	}
-
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
 				+ ", username=" + username + ", password=" + password + ", dateOfBirth=" + dateOfBirth + ", role="
 				+ role + "]";
 	}
+
 }
