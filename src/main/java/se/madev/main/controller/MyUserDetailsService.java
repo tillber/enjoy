@@ -1,4 +1,4 @@
-package se.madev.main.model;
+package se.madev.main.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -7,11 +7,14 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import se.madev.main.integration.UserRepository;
-
+import se.madev.main.model.MyUserDetails;
+import se.madev.main.model.User;
 
 
 @Service
 public class MyUserDetailsService implements UserDetailsService {
+
+    private final int applicantRoleID = 1;
 
    @Autowired
    UserRepository userRepository;
@@ -19,11 +22,19 @@ public class MyUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(userName);
-
-       // user.orElseThrow(() -> new UsernameNotFoundException("Not found: " + userName));
-
         return new MyUserDetails(user);
-        //user.map(MyUserDetails::new).get();
     }
+
+    public void registerApplicant(User user){
+        user.setRole(applicantRoleID);
+        if(userRepository.findByUsername(user.getUsername()) != null){
+            //throw exception
+        }
+        if(userRepository.findByEmail(user.getEmail()) != null){
+            //throw exception
+        }
+        userRepository.save(user);
+    }
+
 }
 
