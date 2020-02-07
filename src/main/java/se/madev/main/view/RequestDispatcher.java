@@ -2,6 +2,7 @@ package se.madev.main.view;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,10 +13,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import se.madev.main.model.MyUserDetails;
+import se.madev.main.model.MyUserDetailsService;
 import se.madev.main.model.User;
 
 @Controller
 public class RequestDispatcher {
+	
+	@Autowired
+	MyUserDetailsService userDetailsService;
 	
 	@GetMapping("/login")
     public String login() {
@@ -30,7 +35,7 @@ public class RequestDispatcher {
 	
 	@PostMapping("/register")
 	public String postRegister(@ModelAttribute("user") User user, BindingResult result) {
-		System.err.println(user.toString());
+		userDetailsService.registerApplicant(user);
 		return "login";
 	}
 	
