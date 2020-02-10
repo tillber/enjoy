@@ -74,7 +74,7 @@ public class RequestDispatcher {
 		MyUserDetails user = (MyUserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		model.addAttribute("user", user);
 		
-		Collection<SimpleGrantedAuthority> authorities = (Collection<SimpleGrantedAuthority>)    SecurityContextHolder.getContext().getAuthentication().getAuthorities();
+		Collection<SimpleGrantedAuthority> authorities = (Collection<SimpleGrantedAuthority>) SecurityContextHolder.getContext().getAuthentication().getAuthorities();
 		if(authorities.contains(new SimpleGrantedAuthority(Role.Type.APPLICANT.toString()))) {
 			return "applicant/index";
         } else {
