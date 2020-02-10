@@ -60,11 +60,7 @@ public class RequestDispatcher {
 			model.addAttribute("errors", errors);
 			return "register";
 		}else {
-			//userDetailsService.registerApplicant(user);
-			//user.setRole(roleRepo.findByType(Type.APPLICANT));
-			//System.err.println(roleRepo.findByType(Type.APPLICANT));
-			//roleRepo.save(new Role(3, Type.APPLICANT));
-			//userRepo.save(user);
+			userDetailsService.registerApplicant(user);
 			return "login";
 		}
 	}
