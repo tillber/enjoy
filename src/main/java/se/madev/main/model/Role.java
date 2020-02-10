@@ -47,21 +47,21 @@ public class Role {
 	public void setType(Type type) {
 		this.type = type;
 	}
-
+	
 	@Override
 	public String toString() {
-		return type.toString();
+		return "Role [id=" + id + ", type=" + type + "]";
 	}
-	
+
 	public enum Type {
-		ROLE_APPLICANT {
+		APPLICANT {
 			public String toString() {
-				return "ROLE_APPLICANT";
+				return "APPLICANT";
 			}
 		},
-		ROLE_RECRUITER {
+		RECRUITER {
 			public String toString() {
-				return "ROLE_RECRUITER";
+				return "RECRUITER";
 			}
 		}
 	}

@@ -38,7 +38,7 @@ public class MyUserDetails implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Arrays.asList(new SimpleGrantedAuthority(getRole().toString()));
+        return Arrays.asList(new SimpleGrantedAuthority(getRole().getType().toString()));
     }
 
     @Override

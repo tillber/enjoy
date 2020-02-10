@@ -1,12 +1,14 @@
 package se.madev.main.view;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -72,7 +74,8 @@ public class RequestDispatcher {
 		MyUserDetails user = (MyUserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		model.addAttribute("user", user);
 		
-		if(httpServletRequest.isUserInRole("ROLE_APPLICANT")) {
+		Collection<SimpleGrantedAuthority> authorities = (Collection<SimpleGrantedAuthority>)    SecurityContextHolder.getContext().getAuthentication().getAuthorities();
+		if(authorities.contains(new SimpleGrantedAuthority(Role.Type.APPLICANT.toString()))) {
 			return "applicant/index";
         } else {
         	return "recruiter/index";
@@ -80,12 +83,16 @@ public class RequestDispatcher {
 	}
 	
 	@GetMapping("/applicant")
-	String applicant() {
+	String applicant(Model model) {
+		MyUserDetails user = (MyUserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		model.addAttribute("user", user);
 		return "applicant/index";
 	}
 	
 	@GetMapping("/recruiter")
-	String recruiter() {
+	String recruiter(Model model) {
+		MyUserDetails user = (MyUserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		model.addAttribute("user", user);
 		return "recruiter/index";
 	}
 	
