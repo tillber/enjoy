@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import se.madev.main.integration.UserRepository;
 
 @SpringBootApplication
-@EnableJpaRepositories(basePackageClasses = UserRepository.class)
+@EnableJpaRepositories(basePackages = {"se.madev.main.integration"})
 public class Application {
 
 	public static void main(String[] args) {
