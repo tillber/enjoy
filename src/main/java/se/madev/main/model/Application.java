@@ -5,8 +5,6 @@ public class Application {
 	private Experience[] experiences;
 	private Availability[] availabilities;
 	private boolean accepted;
-	
-	//commitcheck
 
 	public User getApplicant() {
 		return applicant;

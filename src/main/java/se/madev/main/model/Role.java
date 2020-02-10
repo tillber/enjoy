@@ -54,14 +54,14 @@ public class Role {
 	}
 	
 	public enum Type {
-		ROLE_APPLICANT {
+		APPLICANT {
 			public String toString() {
-				return "ROLE_APPLICANT";
+				return "APPLICANT";
 			}
 		},
-		ROLE_RECRUITER {
+		RECRUITER {
 			public String toString() {
-				return "ROLE_RECRUITER";
+				return "RECRUITER";
 			}
 		}
 	}

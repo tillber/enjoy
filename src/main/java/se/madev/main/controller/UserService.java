@@ -10,8 +10,6 @@ import se.madev.main.integration.UserRepository;
 import se.madev.main.model.MyUserDetails;
 import se.madev.main.model.User;
 
-
-
 @Service
 public class UserService implements UserDetailsService {
 
@@ -26,6 +24,7 @@ public class UserService implements UserDetailsService {
         	throw new UsernameNotFoundException("Not found: " + username);
         }
         
+        System.err.println(user);
         return new MyUserDetails(user);
     }
 }

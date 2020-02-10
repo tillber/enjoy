@@ -3,7 +3,6 @@ package se.madev.main;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -14,15 +13,14 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import se.madev.main.controller.UserService;
-import se.madev.main.integration.UserRepository;
-import se.madev.main.model.Role;
+import se.madev.main.model.Role.Type;
 
 @EnableWebSecurity
 @Configuration
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
-    UserService userDetailsService;
+    UserDetailsService userDetailsService;
 
 	@Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {

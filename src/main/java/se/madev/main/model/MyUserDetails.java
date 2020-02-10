@@ -4,12 +4,9 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Date;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.sql.Date;
 
 public class MyUserDetails implements UserDetails {
 
@@ -22,7 +19,6 @@ public class MyUserDetails implements UserDetails {
     private Role role;
     
     private boolean active;
-    private List<GrantedAuthority> authorities;
 
     public MyUserDetails(User user) {
         this.username = user.getUsername();
@@ -32,13 +28,13 @@ public class MyUserDetails implements UserDetails {
         this.email = user.getEmail();
         this.dateOfBirth = user.getDateOfBirth();
         this.role = user.getRole();
-        
-        this.active = true;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Arrays.asList(new SimpleGrantedAuthority(getRole().toString()));
+
+        return Arrays.asList(new SimpleGrantedAuthority("APPLICANT"));
+
     }
 
     @Override

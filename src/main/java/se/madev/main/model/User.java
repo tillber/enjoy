@@ -1,9 +1,8 @@
 package se.madev.main.model;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
