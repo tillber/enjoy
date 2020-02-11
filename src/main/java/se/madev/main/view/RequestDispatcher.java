@@ -1,6 +1,7 @@
 package se.madev.main.view;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -26,6 +27,7 @@ import se.madev.main.model.MyUserDetails;
 import se.madev.main.model.Role;
 import se.madev.main.model.Role.Type;
 import se.madev.main.model.User;
+import se.madev.main.model.UserAlreadyExistsException;
 
 @Controller
 public class RequestDispatcher {
@@ -60,7 +62,12 @@ public class RequestDispatcher {
 			model.addAttribute("errors", errors);
 			return "register";
 		}else {
-			userDetailsService.registerApplicant(user);
+			try {
+				userDetailsService.registerApplicant(user);
+			} catch (UserAlreadyExistsException e) {
+				model.addAttribute("errors", Arrays.asList(e.getMessage()));
+				return "register";
+			}
 			return "login";
 		}
 	}

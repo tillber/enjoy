@@ -1,0 +1,9 @@
+.has-background-danger-light{
+	background-color: #FFBFCE;
+}
+.has-background-primary-light{
+	background-color: #A9F2C9;
+}
+.message-body{
+	padding: 0.5rem 1rem !important;
+}

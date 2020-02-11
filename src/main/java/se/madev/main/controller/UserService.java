@@ -11,6 +11,7 @@ import se.madev.main.integration.UserRepository;
 import se.madev.main.model.MyUserDetails;
 import se.madev.main.model.Role;
 import se.madev.main.model.User;
+import se.madev.main.model.UserAlreadyExistsException;
 import se.madev.main.model.Role.*;
 
 
@@ -35,13 +36,13 @@ public class UserService implements UserDetailsService {
         return new MyUserDetails(user);
     }
 
-    public void registerApplicant(User user){
+    public void registerApplicant(User user) throws UserAlreadyExistsException{
         user.setRole(roleRepository.findByType(Role.Type.APPLICANT));
-        if(userRepository.findByUsername(user.getUsername()) != null){
-            //throw exception
+        if(userRepository.existsByUsername(user.getUsername())){
+            throw new UserAlreadyExistsException("A user with the given username already exists!");
         }
-        if(userRepository.findByEmail(user.getEmail()) != null){
-            //throw exception
+        if(userRepository.existsByEmail(user.getEmail())){
+        	throw new UserAlreadyExistsException("A user with the given email-address already exists!");
         }
         userRepository.save(user);
     }

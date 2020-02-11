@@ -1,8 +1,9 @@
+<header th:fragment="header" xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
 <nav class="navbar is-light" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
-    <a class="navbar-item" href="/applicant/index">
+    <p class="navbar-item">
       RecruitmentApplication
-    </a>
+    </p>
 
     <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
       <span aria-hidden="true"></span>
@@ -14,9 +15,9 @@
     <div class="navbar-menu">
     <div class="navbar-end">
     <div class="navbar-item">
-    	<p th:text="${user.firstName}">NOT FOUND</p>
+    	<p th:text="${user?.firstName}"></p>
     </div>
-      <div class="navbar-item">
+      <div th:if="${user != null}" class="navbar-item">
         <div class="field">
           <p class="control">
             <a class="button is-danger is-outlined is-small" th:href="@{/logout}">Logout</a>
@@ -26,3 +27,4 @@
     </div>
   </div>
 </nav>
+</header>

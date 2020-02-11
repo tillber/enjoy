@@ -39,7 +39,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .antMatchers("/applicant/**").hasAuthority(Role.Type.APPLICANT.toString())
             .anyRequest().authenticated()
             .and()
-        .formLogin().loginPage("/login").permitAll()
+        .formLogin().loginPage("/login").permitAll().defaultSuccessUrl("/", true)
             .and()
             .logout()
             .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))            
