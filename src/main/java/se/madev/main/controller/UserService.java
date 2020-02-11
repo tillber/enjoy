@@ -38,12 +38,13 @@ public class UserService implements UserDetailsService {
 
     public void registerApplicant(User user) throws UserAlreadyExistsException{
         user.setRole(roleRepository.findByType(Role.Type.APPLICANT));
+        
         if(userRepository.existsByUsername(user.getUsername())){
             throw new UserAlreadyExistsException("A user with the given username already exists!");
-        }
-        if(userRepository.existsByEmail(user.getEmail())){
+        } else if(userRepository.existsByEmail(user.getEmail())){
         	throw new UserAlreadyExistsException("A user with the given email-address already exists!");
         }
+        
         userRepository.save(user);
     }
 
