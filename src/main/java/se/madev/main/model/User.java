@@ -11,25 +11,16 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-<<<<<<< HEAD
 import javax.validation.constraints.NotBlank;
 
 import org.springframework.format.annotation.DateTimeFormat;
-=======
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
->>>>>>> 872c5535a77c8bb5fbcbf0ada1f1c960ad7ee544
 
 @Entity
 @Table(name="users")
 public class User implements Serializable{
 
     @Id
-<<<<<<< HEAD
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-=======
-    @GeneratedValue //generate a unique id starting from
->>>>>>> 872c5535a77c8bb5fbcbf0ada1f1c960ad7ee544
     @Column(name="id")
     private int id;
     

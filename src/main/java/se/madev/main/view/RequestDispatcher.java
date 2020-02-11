@@ -24,7 +24,6 @@ import se.madev.main.integration.RoleRepository;
 import se.madev.main.integration.UserRepository;
 import se.madev.main.model.MyUserDetails;
 import se.madev.main.model.Role;
-import se.madev.main.model.Role.Type;
 import se.madev.main.model.User;
 
 @Controller

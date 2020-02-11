@@ -11,6 +11,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import se.madev.main.integration.RoleRepository;
 import se.madev.main.integration.UserRepository;
 import se.madev.main.model.Role;
 import se.madev.main.model.User;
@@ -31,6 +32,9 @@ public class DatabaseTest{
     @Autowired
     private UserRepository testUserRepository;
     
+    @Autowired
+    private RoleRepository testRoleRep;
+    
     
     private void init(int id) {
 		initRole(1);
@@ -45,7 +49,6 @@ public class DatabaseTest{
     	newUser.setUsername("Darrez");
     	newUser.setPassword("1234");
     	newUser.setEmail("test@testmail.com");
-    	newUser.setRole(role);
     	newUser.setDateOfBirth(new Date(0));
     	
     	testUserEntityManager.persist(newUser);
@@ -53,18 +56,7 @@ public class DatabaseTest{
     }
     
     private void initRole(int id) throws IndexOutOfBoundsException{
-    	role = new Role();
-    	switch(id) {
-    	case(1):
-    		role.setName(APPLICANT);
-    	break;
-    	case(2):
-    		role.setName(RECRUITER);
-    	break;
-    	default:
-    		throw new IndexOutOfBoundsException();
-    	}
-    	testUserEntityManager.persistAndFlush(role);
+    	
     }
     
     
@@ -100,7 +92,7 @@ public class DatabaseTest{
        	//date of birth
        	assertThat(foundUser.getDateOfBirth()).isEqualTo(newUser.getDateOfBirth());
     	
-       	System.out.println("User id/role:"+foundUser.getId()+"/"+foundUser.getRole());
+       	System.out.println("User id/role: "+foundUser.getId()+"/"+foundUser.getRole());
        	System.out.println("User password:"+foundUser.getPassword());
     }
     
