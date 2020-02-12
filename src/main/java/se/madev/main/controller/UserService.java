@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import org.springframework.transaction.annotation.Propagation;
 import se.madev.main.integration.RoleRepository;
 import se.madev.main.integration.UserRepository;
 import se.madev.main.model.MyUserDetails;
@@ -13,6 +14,14 @@ import se.madev.main.model.Role;
 import se.madev.main.model.User;
 import se.madev.main.model.UserAlreadyExistsException;
 
+
+import org.springframework.transaction.annotation.Transactional;
+
+
+/**
+ * Handles authentication and registration of users
+ */
+@Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRES_NEW)
 @Service
 public class UserService implements UserDetailsService {
 
@@ -35,7 +44,7 @@ public class UserService implements UserDetailsService {
         if(user == null) {
         	throw new UsernameNotFoundException("Not found: " + username);
         }
-        
+
         return new MyUserDetails(user);
     }
 

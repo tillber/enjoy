@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import se.madev.main.controller.ApplicationService;
 import se.madev.main.controller.UserService;
 import se.madev.main.integration.RoleRepository;
 import se.madev.main.integration.UserRepository;
@@ -40,6 +41,9 @@ public class RequestDispatcher {
 	
 	@Autowired
 	RoleRepository roleRepo;
+
+	@Autowired
+	ApplicationService applicationService;
 	
 	@GetMapping("/login")
     public String login() {
