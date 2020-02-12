@@ -22,6 +22,12 @@ public class UserService implements UserDetailsService {
 	@Autowired
     RoleRepository roleRepository;
 
+    /**
+     * Locates a specific user based on Username and returns a fully populated user record.
+     * @param username
+     * @return MyUserDetails Object
+     * @throws UsernameNotFoundException
+     */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username);
@@ -33,6 +39,11 @@ public class UserService implements UserDetailsService {
         return new MyUserDetails(user);
     }
 
+    /**
+     * Stores a new unique user into the database.
+     * @param user
+     * @throws UserAlreadyExistsException
+     */
     public void registerApplicant(User user) throws UserAlreadyExistsException{
         user.setRole(roleRepository.findByType(Role.Type.APPLICANT));
         

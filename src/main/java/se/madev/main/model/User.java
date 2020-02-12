@@ -16,6 +16,9 @@ import javax.validation.constraints.NotBlank;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+/**
+ * Class "User" describes a user and their properties in our application
+ */
 @Entity
 @Table(name="users")
 public class User implements Serializable{
