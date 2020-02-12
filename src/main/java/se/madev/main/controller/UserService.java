@@ -12,17 +12,14 @@ import se.madev.main.model.MyUserDetails;
 import se.madev.main.model.Role;
 import se.madev.main.model.User;
 import se.madev.main.model.UserAlreadyExistsException;
-import se.madev.main.model.Role.*;
-
-
 
 @Service
 public class UserService implements UserDetailsService {
 
-   @Autowired
-   UserRepository userRepository;
+	@Autowired
+	UserRepository userRepository;
 
-   @Autowired
+	@Autowired
     RoleRepository roleRepository;
 
     @Override
@@ -47,6 +44,5 @@ public class UserService implements UserDetailsService {
         
         userRepository.save(user);
     }
-
 }
 
