@@ -23,11 +23,21 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Autowired
     UserDetailsService userDetailsService;
 
+    /**
+     * Adds authentication on a custom implementation of userDetailsService
+     * @param auth
+     * @throws Exception
+     */
 	@Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService);
     }
-	
+
+    /**
+     * Controls authorization of users in our application.
+     * @param http
+     * @throws Exception
+     */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -48,7 +58,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .deleteCookies("JSESSIONID")
             .and().exceptionHandling().accessDeniedPage("/exceptions/403");
     }
-    
+
+    /**
+     * Encodes passwords.
+     * @return
+     */
     @Bean
     public PasswordEncoder getPasswordEncoder() {
         return NoOpPasswordEncoder.getInstance();
