@@ -35,12 +35,6 @@ public class RequestDispatcher {
 	
 	@Autowired
 	UserService userDetailsService;
-	
-	@Autowired
-	UserRepository userRepo;
-	
-	@Autowired
-	RoleRepository roleRepo;
 
 	@Autowired
 	ApplicationService applicationService;
@@ -83,6 +77,7 @@ public class RequestDispatcher {
 		
 		Collection<SimpleGrantedAuthority> authorities = (Collection<SimpleGrantedAuthority>) SecurityContextHolder.getContext().getAuthentication().getAuthorities();
 		if(authorities.contains(new SimpleGrantedAuthority(Role.Type.APPLICANT.toString()))) {
+			model.addAttribute("competences", applicationService.getCompetences());
 			return "applicant/index";
         } else {
         	return "recruiter/index";
