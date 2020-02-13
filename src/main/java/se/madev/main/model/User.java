@@ -11,10 +11,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+/**
+ * Class "User" describes a user and their properties in our application
+ */
 @Entity
 @Table(name="users")
 public class User implements Serializable{
@@ -32,11 +36,12 @@ public class User implements Serializable{
     @NotBlank(message = "Last name is mandatory")
     private String lastName;
     
-    @Column(name="email")
+    @Column(name="email", unique = true)
     @NotBlank(message = "Email is mandatory")
+    @Email(message = "Email should be valid")
     private String email;
 
-    @Column(name="username")
+    @Column(name="username", unique = true)
     @NotBlank(message = "Username is mandatory")
     private String username;
 

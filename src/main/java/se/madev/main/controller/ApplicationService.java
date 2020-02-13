@@ -1,32 +1,33 @@
 package se.madev.main.controller;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 
+import org.springframework.stereotype.Service;
+import se.madev.main.integration.CompetenceRepository;
 import se.madev.main.integration.DBHandler;
+import se.madev.main.model.Competence;
 import se.madev.main.model.User;
 
+@Service
 public class ApplicationService {
-	DBHandler repository;
+
+
+	@Autowired
+	CompetenceRepository competenceRepository;
+
+	//@Autowired
+	//ApplicationRepository applicationRepository;
 	
-	public ApplicationService() {
-		repository = new DBHandler();
+	public List<Competence> getCompetences(){
+		List<Competence> competence = competenceRepository.findAll();
+
+		return competence;
 	}
-	
-	/*public Authentication authenticate(Authentication authentication) throws IncorrectPasswordException, UserDoesNotExistException {
-		/*String username = authentication.getName();
-		String password = authentication.getCredentials().toString();
-		if(new User(username, password).equals(new User("hello", "world"))) {
-			return new UsernamePasswordAuthenticationToken(username, password, Collections.emptyList());
-		}else {
-			throw new IncorrectPasswordException();
-		}
-		/*try {
-			
-	    } catch(UserDoesNotExistException exception) {
-			throw exception;
-		}
-	}*/
 }

@@ -7,29 +7,46 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import org.springframework.transaction.annotation.Propagation;
 import se.madev.main.integration.RoleRepository;
 import se.madev.main.integration.UserRepository;
 import se.madev.main.model.MyUserDetails;
 import se.madev.main.model.Role;
 import se.madev.main.model.User;
 import se.madev.main.model.UserAlreadyExistsException;
-import se.madev.main.model.Role.*;
 
 
+import org.springframework.transaction.annotation.Transactional;
 
+
+/**
+ * Handles authentication and registration of users
+ */
+@Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRES_NEW)
 @Service
 public class UserService implements UserDetailsService {
 
-   @Autowired
-   UserRepository userRepository;
+	@Autowired
+	UserRepository userRepository;
 
+<<<<<<< HEAD
    @Autowired
    RoleRepository roleRepository;
    
    @Autowired
    private PasswordEncoder encoder;
    
+=======
+	@Autowired
+    RoleRepository roleRepository;
+>>>>>>> 9697218d1a639010661b3edb34ead9ca702ec385
 
+    /**
+     * Locates a specific user based on Username and returns a fully populated user record.
+     * @param username
+     * @return MyUserDetails Object
+     * @throws UsernameNotFoundException
+     */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username);
@@ -37,21 +54,29 @@ public class UserService implements UserDetailsService {
         if(user == null) {
         	throw new UsernameNotFoundException("Not found: " + username);
         }
-        
+
         return new MyUserDetails(user);
     }
 
+    /**
+     * Stores a new unique user into the database.
+     * @param user
+     * @throws UserAlreadyExistsException
+     */
     public void registerApplicant(User user) throws UserAlreadyExistsException{
         user.setRole(roleRepository.findByType(Role.Type.APPLICANT));
+        
         if(userRepository.existsByUsername(user.getUsername())){
             throw new UserAlreadyExistsException("A user with the given username already exists!");
-        }
-        if(userRepository.existsByEmail(user.getEmail())){
+        } else if(userRepository.existsByEmail(user.getEmail())){
         	throw new UserAlreadyExistsException("A user with the given email-address already exists!");
         }
+<<<<<<< HEAD
         user.setPassword(encoder.encode(user.getPassword()));
+=======
+        
+>>>>>>> 9697218d1a639010661b3edb34ead9ca702ec385
         userRepository.save(user);
     }
-
 }
 

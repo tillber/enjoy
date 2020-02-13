@@ -58,8 +58,7 @@
 			<div class="control">
 				<div class="select">
 					<select id="exp-area">
-						<option>Select dropdown</option>
-						<option>With options</option>
+						<option th:each="competence: ${competences}"><p th:text="${competence.name}"></p></option>
 					</select>
 				</div>
 			</div>

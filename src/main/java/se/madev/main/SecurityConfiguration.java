@@ -12,8 +12,15 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+<<<<<<< HEAD
+=======
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.transaction.annotation.Propagation;
+import se.madev.main.controller.UserService;
+>>>>>>> 9697218d1a639010661b3edb34ead9ca702ec385
 import se.madev.main.model.Role;
 
+@EnableTransactionManagement
 @EnableWebSecurity
 @Configuration
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
@@ -21,11 +28,21 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Autowired
     UserDetailsService userDetailsService;
 
+    /**
+     * Adds authentication on a custom implementation of userDetailsService
+     * @param auth
+     * @throws Exception
+     */
 	@Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService);
     }
-	
+
+    /**
+     * Controls authorization of users in our application.
+     * @param http
+     * @throws Exception
+     */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -46,7 +63,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .deleteCookies("JSESSIONID")
             .and().exceptionHandling().accessDeniedPage("/exceptions/403");
     }
-    
+
+    /**
+     * Encodes passwords.
+     * @return
+     */
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();

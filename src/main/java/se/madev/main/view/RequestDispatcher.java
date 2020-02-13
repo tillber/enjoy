@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import se.madev.main.controller.ApplicationService;
 import se.madev.main.controller.UserService;
 import se.madev.main.integration.RoleRepository;
 import se.madev.main.integration.UserRepository;
@@ -34,12 +35,9 @@ public class RequestDispatcher {
 	
 	@Autowired
 	UserService userDetailsService;
-	
+
 	@Autowired
-	UserRepository userRepo;
-	
-	@Autowired
-	RoleRepository roleRepo;
+	ApplicationService applicationService;
 	
 	@GetMapping("/login")
     public String login() {
@@ -79,6 +77,7 @@ public class RequestDispatcher {
 		
 		Collection<SimpleGrantedAuthority> authorities = (Collection<SimpleGrantedAuthority>) SecurityContextHolder.getContext().getAuthentication().getAuthorities();
 		if(authorities.contains(new SimpleGrantedAuthority(Role.Type.APPLICANT.toString()))) {
+			model.addAttribute("competences", applicationService.getCompetences());
 			return "applicant/index";
         } else {
         	return "recruiter/index";
