@@ -28,18 +28,9 @@ public class UserService implements UserDetailsService {
 
 	@Autowired
 	UserRepository userRepository;
-
-<<<<<<< HEAD
-   @Autowired
-   RoleRepository roleRepository;
-   
-   @Autowired
-   private PasswordEncoder encoder;
-   
-=======
+	
 	@Autowired
     RoleRepository roleRepository;
->>>>>>> 9697218d1a639010661b3edb34ead9ca702ec385
 
     /**
      * Locates a specific user based on Username and returns a fully populated user record.
@@ -71,11 +62,7 @@ public class UserService implements UserDetailsService {
         } else if(userRepository.existsByEmail(user.getEmail())){
         	throw new UserAlreadyExistsException("A user with the given email-address already exists!");
         }
-<<<<<<< HEAD
-        user.setPassword(encoder.encode(user.getPassword()));
-=======
         
->>>>>>> 9697218d1a639010661b3edb34ead9ca702ec385
         userRepository.save(user);
     }
 }
