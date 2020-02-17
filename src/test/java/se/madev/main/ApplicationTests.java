@@ -1,6 +1,7 @@
 package se.madev.main;
 
 import static org.hamcrest.CoreMatchers.containsString;
+import static org.springframework.security.test.web.servlet.response.SecurityMockMvcResultMatchers.unauthenticated;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -43,13 +44,15 @@ class ApplicationTests {
 	@Test
 	public void returnLoginPageWhenUnauthorizedApplicant() throws Exception {
 		this.mockMvc.perform(get("/applicant")).andDo(print()).andExpect(status().isFound())
-				.andExpect(redirectedUrl(LOCALHOST+"/login"));
+				.andExpect(redirectedUrl(LOCALHOST+"/login"))
+				.andExpect(unauthenticated());
 	}
 	
 	@Test
 	public void returnLoginPageWhenUnauthorizedRecruiter() throws Exception {
 		this.mockMvc.perform(get("/recruiter")).andDo(print()).andExpect(status().isFound())
-				.andExpect(redirectedUrl(LOCALHOST+"/login"));
+				.andExpect(redirectedUrl(LOCALHOST+"/login"))
+				.andExpect(unauthenticated());
 	}
 
 }
