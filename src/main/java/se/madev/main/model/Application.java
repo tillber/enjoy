@@ -4,7 +4,7 @@ public class Application {
 	private User applicant;
 	private Experience[] experiences;
 	private Availability[] availabilities;
-	private boolean accepted;
+	private Status status;
 
 	public User getApplicant() {
 		return applicant;
@@ -29,12 +29,30 @@ public class Application {
 	public void setAvailabilities(Availability[] availabilities) {
 		this.availabilities = availabilities;
 	}
-
-	public boolean isAccepted() {
-		return accepted;
+	
+	public Status getStatus() {
+		return status;
 	}
 
-	public void setAccepted(boolean accepted) {
-		this.accepted = accepted;
+	public void setStatus(Status status) {
+		this.status = status;
+	}
+	
+	public enum Status {
+		UNHANDLED {
+			public String toString() {
+				return "UNHANDLED";
+			}
+		},
+		ACCEPTED {
+			public String toString() {
+				return "ACCEPTED";
+			}
+		},
+		REJECTED {
+			public String toString() {
+				return "REJECTED";
+			}
+		}
 	}
 }
