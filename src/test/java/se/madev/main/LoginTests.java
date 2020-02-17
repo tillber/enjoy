@@ -26,11 +26,13 @@ import org.springframework.web.context.WebApplicationContext;
 @AutoConfigureMockMvc
 public class LoginTests {
 	
-	//private final Pbkdf2PasswordEncoder encoder = new Pbkdf2PasswordEncoder();
 	private final String LOGIN_ERROR_URL = "/login?error";
-	private final String INVALID_CREDENTIALS = "Invalid Credentials!";
-	private final String USR = "master";
-	private final String PSW = "pleb";//encoder.encode((CharSequence)"1234");
+
+	private final String USR_REC = "admin";
+	private final String PSW_REC = "root";
+	
+	private final String USR_APL = "noob";
+	private final String PSW_APL = "plebb";
 	
 	@Autowired
 	private MockMvc mvc;
@@ -47,8 +49,17 @@ public class LoginTests {
 	}
 	
 	@Test
-	public void loginWithCorrectCredentialsApplicant() throws Exception {
-		RequestBuilder req = formLogin("/login").user(USR).password(PSW);
+	public void loginAsRecruiter() throws Exception {
+		RequestBuilder req = formLogin("/login").user(USR_REC).password(PSW_REC);
+		mvc.perform(req)
+		.andExpect(redirectedUrl("/"))
+		.andExpect(status().isFound())
+		.andExpect(authenticated());
+	}
+	
+	@Test
+	public void loginAsApplicant() throws Exception {
+		RequestBuilder req = formLogin("/login").user(USR_APL).password(PSW_APL);
 		mvc.perform(req)
 		.andExpect(redirectedUrl("/"))
 		.andExpect(status().isFound())

@@ -31,6 +31,9 @@ public class UserService implements UserDetailsService {
 	
 	@Autowired
     RoleRepository roleRepository;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
     /**
      * Locates a specific user based on Username and returns a fully populated user record.
@@ -55,13 +58,13 @@ public class UserService implements UserDetailsService {
      * @throws UserAlreadyExistsException
      */
     public void registerApplicant(User user) throws UserAlreadyExistsException{
-    	user.setRole(roleRepository.findByType(Role.Type.APPLICANT));
+    	user.setRole(roleRepository.findByType(Role.Type.RECRUITER));
         if(userRepository.existsByUsername(user.getUsername())){
             throw new UserAlreadyExistsException("A user with the given username already exists!");
         } else if(userRepository.existsByEmail(user.getEmail())){
         	throw new UserAlreadyExistsException("A user with the given email-address already exists!");
         }
-        
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
     }
 }
