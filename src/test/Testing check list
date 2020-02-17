@@ -1,0 +1,105 @@
+Functionality testing (with valid/invalid inputs)
+1. Creating a new user (integration)
+2. Login/Logout (mock and integration)
+3. Delete account(?) (Not needed)
+4. Create and send an application form (TBA)
+5. Review applications as a recruiter (TBA)
+6. Follow and view feed-back from recruiter as an applicant(?) (TBA)
+
+Usability testing
+7. Clear and readable text eg. font, size, color, position, timing
+8. Responsive design
+9. Easy to understand navigation and status messages
+
+Performance testing
+10. Able to handle bulk loads
+11. multiple user requests
+12. multiple connections
+13. stress test
+14. crash recovery
+
+Compatibility testing
+15. Compatibility with different OS (Windows/Mac/Linux)
+16. Different web browsers (Chrome, Firefox, IE, Safari etc)
+17. Mobile Compatibility (different screen sizes and resolution)
+
+Security testing
+18. XSS
+19. SQL-injection
+20. CSRF
+21. Broken authentication/verification
+22. Broken session management
+
+--------------------------------------------------------------------------
+1. Creating a new user
+Create a new user with the given form given unique username and mail and assert that the created user exists in the database.
+Further, try logging in with said user and assert that user details are correct.
+Assert the users authorization level (recruiter/applicant) with its access to all other possible links and pages.
+Assert that the users information is correctly stored in the database.
+Validate users input:
+ - No digits in name and last name
+ - Valid e-mail format [aA-zZ][0-9][._-]@def.xy
+ - Valid date of birth, no younger than 18yrs.
+ - Valid username only containing [aA-Zz] [0-9] [._-]
+ - Valid passwords: minimum length of 10 characters, containing at least one digit, one uppercase letter and one special symbol !"#¤%&/()=?-.,][
+ - Throw exception when e-mail and/or username is not unique (user with same mail/username already exists in the database).
+
+2. Login/Logout
+Create a new user, login and assert expected page to be showing depending on authorization level of the user (recruiter/applicant).
+Login with an existing user and assert as above.
+Assert that a session is created and bound the logged in user.
+Assert that after a logout the bound session is destroyed.
+
+3. Delete account
+Assert that upon deletion of user that the user is logged out (no session is bound) and has no reference left in the database.
+
+4. Create and send an application form
+Assert that only users with the role type Applicant is able to create and send applications.
+Assert that the users name, last name, date of birth is pre-filled and non editable.
+Assert that the user is able to fill out at least one experience and is limited to the maximum amount (30).
+Assert that the database has saved the sent application and is visible for a recruiter.
+Validation of input is present throughout the whole form:
+  - TBA
+
+5. Review application as a recruiter
+Able to review non-handled applications
+**(SUGGESTION: when a recruiter handles an application, assign a "busy" flag so
+no other recruiters can interrupt. Similarly, when a recruiter regret handling an application, the recruiter can then
+release the application thus changing the flag from "busy" to "available").**
+Mark applications as handled either with "approved" or "not approved".
+
+6. Follow and view feed-back from recruiter as an applicant
+Assert that correct application is displayed for view only (non editable) for the logged in applicant.
+Assert that the correct status is showing on the application (pending/accepted/rejected)
+
+7. Clear and readable text
+A field study and/or case study should suffice.
+The study should include the user going through each step and giving feedback on the application usability and possible changes.
+
+8. Responsive design
+The application displays its status and it is clear to the user what to do next or what the user has completed
+	eg clearly display where to login, register, logout, create an application and registered a new user, logged in, sent in an application 
+
+9. Easy to understand navigation and status messages
+Clearly display what went good and what went bad. eg bad input during registration or login, display that the user has successfully logged in,
+error messages are easy to understand for the non-programmer.
+Buttons and links should be clearly visible, naturally positioned and easy to access.
+
+10-13 Stress tests
+Use JMeter to build a stress test in Spring Boot.
+Complement the tests using third-party tools such as Google.
+
+14. Crash recovery
+In case of crashed, assert that it is logged and rollbacks are engaged for the database.
+Recover by using scrpits for tomcat(?)
+
+15. Compatibility with different OS (Windows/Mac/Linux)
+????
+
+16. Different web browsers (Chrome, Firefox, IE, Safari etc)
+There is no built-in spring test modules for compatibility.
+Suggestion on using third-party software/tools such as BrowserStack, Sauce Labs, CrossBrowser Testing, Browsershots.
+
+17. Security testing
+Boot up Kali Linux and hack away!
+

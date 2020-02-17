@@ -22,11 +22,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import se.madev.main.controller.ApplicationService;
 import se.madev.main.controller.UserService;
-import se.madev.main.integration.RoleRepository;
-import se.madev.main.integration.UserRepository;
 import se.madev.main.model.MyUserDetails;
 import se.madev.main.model.Role;
-import se.madev.main.model.Role.Type;
 import se.madev.main.model.User;
 import se.madev.main.model.UserAlreadyExistsException;
 

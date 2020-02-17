@@ -45,6 +45,7 @@ class ApplicationTests {
 		this.mockMvc.perform(get("/applicant")).andDo(print()).andExpect(status().isFound())
 				.andExpect(redirectedUrl(LOCALHOST+"/login"));
 	}
+	
 	@Test
 	public void returnLoginPageWhenUnauthorizedRecruiter() throws Exception {
 		this.mockMvc.perform(get("/recruiter")).andDo(print()).andExpect(status().isFound())
