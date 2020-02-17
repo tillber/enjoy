@@ -50,13 +50,12 @@ public class UserService implements UserDetailsService {
     }
 
     /**
-     * Stores a new unique user into the database.
+     * Stores a new unique applicant user into the database.
      * @param user
      * @throws UserAlreadyExistsException
      */
     public void registerApplicant(User user) throws UserAlreadyExistsException{
-        user.setRole(roleRepository.findByType(Role.Type.APPLICANT));
-        
+    	user.setRole(roleRepository.findByType(Role.Type.APPLICANT));
         if(userRepository.existsByUsername(user.getUsername())){
             throw new UserAlreadyExistsException("A user with the given username already exists!");
         } else if(userRepository.existsByEmail(user.getEmail())){
