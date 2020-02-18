@@ -8,6 +8,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import org.springframework.transaction.annotation.Propagation;
+
+import se.madev.main.Application;
 import se.madev.main.integration.RoleRepository;
 import se.madev.main.integration.UserRepository;
 import se.madev.main.model.MyUserDetails;
@@ -48,7 +50,7 @@ public class UserService implements UserDetailsService {
         if(user == null) {
         	throw new UsernameNotFoundException("Not found: " + username);
         }
-
+        
         return new MyUserDetails(user);
     }
 

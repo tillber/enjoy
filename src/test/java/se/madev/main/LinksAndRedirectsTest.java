@@ -16,7 +16,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-class ApplicationTests {
+class LinksAndRedirectsTest {
 	
 	private final String LOCALHOST = "http://localhost";
 
