@@ -102,6 +102,7 @@ public class UserTest {
 	   	
 	   	return newUser;
 	}
+	
 	@Test
 	public void createdNewUserExists() {
 		User[] users = initNewUsersAndPopulate();
