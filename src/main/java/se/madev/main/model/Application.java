@@ -1,23 +1,40 @@
 package se.madev.main.model;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import javax.persistence.*;
 
+@Entity
+@Table(name="application")
 public class Application {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="id")
+	private int id;
+
+	@OneToOne
+	@JoinColumn(name = "applicant")
 	private User applicant;
-	private Experience experience;
-	private Availability availability;
-	private Status status;
 	
-	public Application(User applicant, Experience experience, Availability availability) {
-		this.applicant = applicant;
-		this.experience = experience;
-		this.availability = availability;
-		this.status = Status.UNHANDLED;
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "application", orphanRemoval = true)
+	private Availability availability;
+
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "application", orphanRemoval = true)
+	private Experience experience; 
+	
+	@ManyToOne
+	@JoinColumn(name="status")
+	private Status status;
+
+	public Application(){
+		status = new Status(Status.Type.UNHANDLED);
 	}
 	
-	public Application() {
-		this.status = Status.UNHANDLED;
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public User getApplicant() {
@@ -27,11 +44,11 @@ public class Application {
 	public void setApplicant(User applicant) {
 		this.applicant = applicant;
 	}
-	
-	public Experience getExperience() {
-		return experience;
-	}
 
+	public Experience getExperience() {
+		return this.experience;
+	}
+	
 	public void setExperience(Experience experience) {
 		this.experience = experience;
 	}
@@ -48,31 +65,14 @@ public class Application {
 		return status;
 	}
 
+	@Override
+	public String toString() {
+		return "Application [id=" + id + ", applicant=" + applicant + ", availability=" + availability
+				+ ", experience=" + experience + ", status=" + status + "]";
+	}
+
 	public void setStatus(Status status) {
 		this.status = status;
 	}
-	
-	@Override
-	public String toString() {
-		return "Application [applicant=" + applicant + ", experience=" + experience
-				+ ", availability=" + availability + ", status=" + status + "]";
-	}
 
-	public enum Status {
-		UNHANDLED {
-			public String toString() {
-				return "UNHANDLED";
-			}
-		},
-		ACCEPTED {
-			public String toString() {
-				return "ACCEPTED";
-			}
-		},
-		REJECTED {
-			public String toString() {
-				return "REJECTED";
-			}
-		}
-	}
 }

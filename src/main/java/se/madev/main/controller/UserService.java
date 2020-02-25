@@ -9,17 +9,12 @@ import org.springframework.stereotype.Service;
 
 import org.springframework.transaction.annotation.Propagation;
 
-import se.madev.main.Application;
+import se.madev.main.integration.ApplicationRepository;
 import se.madev.main.integration.RoleRepository;
 import se.madev.main.integration.UserRepository;
-import se.madev.main.model.MyUserDetails;
-import se.madev.main.model.Role;
-import se.madev.main.model.User;
-import se.madev.main.model.UserAlreadyExistsException;
-
+import se.madev.main.model.*;
 
 import org.springframework.transaction.annotation.Transactional;
-
 
 /**
  * Handles authentication and registration of users
@@ -33,7 +28,10 @@ public class UserService implements UserDetailsService {
 	
 	@Autowired
     RoleRepository roleRepository;
-	
+
+	@Autowired
+    ApplicationRepository applicationRepository;
+
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
@@ -50,7 +48,10 @@ public class UserService implements UserDetailsService {
         if(user == null) {
         	throw new UsernameNotFoundException("Not found: " + username);
         }
-        
+
+        Application application = applicationRepository.findByApplicant(user);
+        Experience experience = application.getExperience();
+        System.out.println(experience);
         return new MyUserDetails(user);
     }
 

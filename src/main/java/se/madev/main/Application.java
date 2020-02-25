@@ -10,11 +10,10 @@ import org.slf4j.LoggerFactory;
 @EnableJpaRepositories(basePackages = {"se.madev.main.integration"})
 public class Application {
 	
-	private static final Logger logger = LoggerFactory.getLogger(Application.class);
+	//private static final Logger logger = LoggerFactory.getLogger(Application.class);
 	
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
-		logger.info("Application Start");
+	//	logger.info("Application Start");
 	}
-
 }

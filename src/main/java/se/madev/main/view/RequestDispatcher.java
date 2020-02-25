@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import se.madev.main.controller.ApplicationService;
 import se.madev.main.controller.UserService;
 import se.madev.main.model.Application;
+import se.madev.main.model.Application;
 import se.madev.main.model.Availability;
 import se.madev.main.model.Experience;
 import se.madev.main.model.MyUserDetails;
