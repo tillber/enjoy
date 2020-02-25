@@ -56,6 +56,18 @@ public class User implements Serializable{
     @ManyToOne
     @JoinColumn(name = "role")
     private Role role;
+    
+    public User(MyUserDetails user) {
+    	this.username = user.getUsername();
+        this.password = user.getPassword();
+        this.firstName = user.getFirstName();
+        this.lastName = user.getLastName();
+        this.email = user.getEmail();
+        this.dateOfBirth = user.getDateOfBirth();
+        this.role = user.getRole();
+    }
+    
+    public User() {}
 
 	public int getId() {
 		return id;

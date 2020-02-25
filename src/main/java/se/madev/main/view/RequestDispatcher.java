@@ -19,9 +19,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import se.madev.main.controller.ApplicationService;
 import se.madev.main.controller.UserService;
+import se.madev.main.model.Application;
+import se.madev.main.model.Availability;
+import se.madev.main.model.Experience;
 import se.madev.main.model.MyUserDetails;
 import se.madev.main.model.Role;
 import se.madev.main.model.User;
@@ -36,18 +40,18 @@ public class RequestDispatcher {
 	@Autowired
 	ApplicationService applicationService;
 	
-	@GetMapping("/login")
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login() {
 		return "login";
     }
 	
-	@GetMapping("/register")
+	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public String getRegister(Model model) {
 		model.addAttribute("user", new User());
 		return "register";
 	}
 	
-	@PostMapping("/register")
+	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public String postRegister(@ModelAttribute @Valid User user, BindingResult result, Model model) {
 		if(result.hasErrors()) {
 			List<String> errors = new ArrayList<>();
@@ -67,7 +71,7 @@ public class RequestDispatcher {
 		}
 	}
 	
-	@GetMapping("/")
+	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String index(Model model, HttpServletRequest httpServletRequest) {
 		MyUserDetails user = (MyUserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		model.addAttribute("user", user);
@@ -75,27 +79,41 @@ public class RequestDispatcher {
 		Collection<SimpleGrantedAuthority> authorities = (Collection<SimpleGrantedAuthority>) SecurityContextHolder.getContext().getAuthentication().getAuthorities();
 		if(authorities.contains(new SimpleGrantedAuthority(Role.Type.APPLICANT.toString()))) {
 			model.addAttribute("competences", applicationService.getCompetences());
+			
+			model.addAttribute("application", new Application());
 			return "applicant/index";
         } else {
         	return "recruiter/index";
         }
 	}
 	
-	@GetMapping("/applicant")
-	String applicant(Model model) {
+	@RequestMapping(value = "/applicant", method = RequestMethod.GET)
+	public String applicant(Model model) {
 		MyUserDetails user = (MyUserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+				
+		model.addAttribute("user", user);
+		model.addAttribute("application", new Application());
+		
+		return "applicant/index";
+	}
+	
+	@RequestMapping(value = "/applicant", method = RequestMethod.POST)
+	public String postApplication(@ModelAttribute @Valid Application application, BindingResult result, Model model) {
+		MyUserDetails user = (MyUserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		application.setApplicant(new User(user));
+		System.err.println(application);
 		model.addAttribute("user", user);
 		return "applicant/index";
 	}
 	
-	@GetMapping("/recruiter")
-	String recruiter(Model model) {
+	@RequestMapping(value = "/recruiter", method = RequestMethod.GET)
+	public String recruiter(Model model) {
 		MyUserDetails user = (MyUserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		model.addAttribute("user", user);
 		return "recruiter/index";
 	}
 	
-	@RequestMapping("/exceptions/403")
+	@RequestMapping(value = "/exceptions/403", method = RequestMethod.GET)
 	public String accessDenied() {
 	    return "exceptions/403";
 	}

@@ -8,6 +8,8 @@ public class Experience {
 		this.areaOfExpertise = areaOfExpertise;
 		this.numberOfYears = numberOfYears;
 	}
+	
+	public Experience() {}
 
 	public String getAreaOfExpertise() {
 		return areaOfExpertise;
@@ -23,5 +25,10 @@ public class Experience {
 
 	public void setNumberOfYears(int numberOfYears) {
 		this.numberOfYears = numberOfYears;
+	}
+
+	@Override
+	public String toString() {
+		return "Experience [areaOfExpertise=" + areaOfExpertise + ", numberOfYears=" + numberOfYears + "]";
 	}
 }

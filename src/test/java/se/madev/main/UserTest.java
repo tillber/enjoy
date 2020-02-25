@@ -62,6 +62,7 @@ public class UserTest {
 	
 	private final Type APPLICANT_ROLE = Type.APPLICANT;
 	private final Type RECRUITER_ROLE = Type.RECRUITER;
+	
 	@Autowired
 	private TestEntityManager entityManager;
 	 

@@ -2,6 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:layout="http://www.w3.org/1999/xhtml"  xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" layout:decorate="~{/fragments/layout}">
 <head>
 	<title>Recruiter</title>
+	
+	<!-- JS Files -->
+	<script th:src="@{/js/recruiter.js}"></script>
 </head>
 <body>
 <div layout:fragment="content">
@@ -36,7 +39,6 @@
 					<th>
 						Status
 					</th>
-					<th></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -46,7 +48,14 @@
 				<td>tillber@kth.se</td>
 				<td>1998-10-10</td>
 				<td>UNHANDLED</td>
-				<td><button class='button is-small'>See application</button></td>
+				</tr>
+				<tr><td colspan="7" class="application no-padding"><p>Hello World</p></td></tr>
+				<tr class="has-background-white-bis">
+				<td>Martin</td>
+				<td>Tillberg</td>
+				<td>tillber@kth.se</td>
+				<td>1998-10-10</td>
+				<td>UNHANDLED</td>
 				</tr>
 				<tr class="has-background-white-bis">
 				<td>Martin</td>
@@ -54,15 +63,6 @@
 				<td>tillber@kth.se</td>
 				<td>1998-10-10</td>
 				<td>UNHANDLED</td>
-				<td><button class='button is-small'>See application</button></td>
-				</tr>
-				<tr class="has-background-white-bis">
-				<td>Martin</td>
-				<td>Tillberg</td>
-				<td>tillber@kth.se</td>
-				<td>1998-10-10</td>
-				<td>UNHANDLED</td>
-				<td><button class='button is-small'>See application</button></td>
 				</tr>
 			</tbody>
 		</table>
