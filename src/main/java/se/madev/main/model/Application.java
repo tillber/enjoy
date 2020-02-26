@@ -64,15 +64,14 @@ public class Application {
 	public Status getStatus() {
 		return status;
 	}
+	
+	public void setStatus(Status status) {
+		this.status = status;
+	}
 
 	@Override
 	public String toString() {
 		return "Application [id=" + id + ", applicant=" + applicant + ", availability=" + availability
 				+ ", experience=" + experience + ", status=" + status + "]";
 	}
-
-	public void setStatus(Status status) {
-		this.status = status;
-	}
-
 }
