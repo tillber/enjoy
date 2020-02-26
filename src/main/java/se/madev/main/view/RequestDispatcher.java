@@ -2,11 +2,15 @@ package se.madev.main.view;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +24,7 @@ import se.madev.main.controller.ApplicationService;
 import se.madev.main.controller.UserService;
 import se.madev.main.model.Application;
 import se.madev.main.model.MyUserDetails;
+import se.madev.main.model.Role;
 import se.madev.main.model.User;
 import se.madev.main.model.UserAlreadyExistsException;
 
@@ -31,6 +36,17 @@ public class RequestDispatcher {
 
 	@Autowired
 	ApplicationService applicationService;
+	
+	
+	@RequestMapping(value = "/")
+	public String index(Authentication authentication) {
+		Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+		if(authorities.contains(new SimpleGrantedAuthority(Role.Type.APPLICANT.toString()))) {
+			return "redirect:/applicant";
+        } else {
+        	return "redirect:/recruiter";
+        }
+	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login() {

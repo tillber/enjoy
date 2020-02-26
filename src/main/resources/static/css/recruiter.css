@@ -14,3 +14,9 @@ div.application{
 .no-padding{
 	padding: 0 !important;
 }
+div.app .area{
+	margin: 1rem;
+}
+div.app hr{
+	margin: 0.5rem 0;
+}
