@@ -23,6 +23,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
     UserDetailsService userDetailsService;
+	
+	@Autowired
+	LoginSuccessHandler loginSuccessHandler;
 
     /**
      * Adds authentication on a custom implementation of userDetailsService
@@ -51,7 +54,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .antMatchers("/applicant/**").hasAuthority(Role.Type.APPLICANT.toString())
             .anyRequest().authenticated()
             .and()
-        .formLogin().loginPage("/login").permitAll().defaultSuccessUrl("/", true)
+        .formLogin().loginPage("/login").permitAll().successHandler(loginSuccessHandler)
             .and()
             .logout()
             .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))            

@@ -9,4 +9,6 @@ import se.madev.main.model.User;
 public interface ApplicationRepository extends JpaRepository<Application, Integer> {
 
     Application findByApplicant(User applicant);
+    
+    Application existsByApplicant(User applicant);
 }

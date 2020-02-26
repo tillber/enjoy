@@ -2,14 +2,11 @@ package se.madev.main.view;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,7 +20,6 @@ import se.madev.main.controller.ApplicationService;
 import se.madev.main.controller.UserService;
 import se.madev.main.model.Application;
 import se.madev.main.model.MyUserDetails;
-import se.madev.main.model.Role;
 import se.madev.main.model.User;
 import se.madev.main.model.UserAlreadyExistsException;
 
@@ -67,24 +63,10 @@ public class RequestDispatcher {
 		}
 	}
 	
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String index(Model model, HttpServletRequest httpServletRequest) {
-		MyUserDetails user = getAuthenticatedUser();
-		model.addAttribute("user", user);
-		
-		Collection<SimpleGrantedAuthority> authorities = (Collection<SimpleGrantedAuthority>) SecurityContextHolder.getContext().getAuthentication().getAuthorities();
-		if(authorities.contains(new SimpleGrantedAuthority(Role.Type.APPLICANT.toString()))) {
-			model.addAttribute("competences", applicationService.getCompetences());
-			model.addAttribute("application", new Application());
-			return "applicant/index";
-        } else {
-        	return "recruiter/index";
-        }
-	}
-	
 	@RequestMapping(value = "/applicant", method = RequestMethod.GET)
 	public String applicant(Model model) {
 		MyUserDetails user = getAuthenticatedUser();
+		model.addAttribute("competences", applicationService.getCompetences());
 		model.addAttribute("user", user);
 		model.addAttribute("application", new Application());
 		return "applicant/index";

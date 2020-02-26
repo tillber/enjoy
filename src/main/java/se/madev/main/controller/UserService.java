@@ -49,9 +49,9 @@ public class UserService implements UserDetailsService {
         	throw new UsernameNotFoundException("Not found: " + username);
         }
 
-        Application application = applicationRepository.findByApplicant(user);
-        Experience experience = application.getExperience();
-        System.out.println(experience);
+        //Application application = applicationRepository.findByApplicant(user);
+        //Experience experience = application.getExperience();
+        //System.out.println(experience);
         return new MyUserDetails(user);
     }
 
