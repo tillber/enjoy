@@ -12,7 +12,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Pattern;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -30,10 +34,12 @@ public class User implements Serializable{
     
     @Column(name="firstname")
     @NotBlank(message = "First name is mandatory")
+    @Pattern(regexp = "^[A-Za-z-]*$",message = "Invalid first name!")
     private String firstName;
     
     @Column(name="lastname")
     @NotBlank(message = "Last name is mandatory")
+    @Pattern(regexp = "^[A-Za-z-]*$", message = "Invalid last name!")
     private String lastName;
     
     @Column(name="email", unique = true)
@@ -50,6 +56,7 @@ public class User implements Serializable{
     private String password;
     
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Past(message = "Invalid date of birth!")
     @Column(name="dateofbirth")
     private Date dateOfBirth;
     

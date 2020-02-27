@@ -1,5 +1,7 @@
 package se.madev.main.integration;
 
+import java.util.Date;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import se.madev.main.model.User;

@@ -1,5 +1,5 @@
 Functionality testing (with valid/invalid inputs)
-1. Creating a new user (integration)
+1. Creating a new user (integration) Done
 2. Login/Logout (mock and integration)
 3. Delete account(?) (Not needed)
 4. Create and send an application form (TBA)

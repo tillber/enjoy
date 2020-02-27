@@ -56,7 +56,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .and()
         .formLogin().loginPage("/login").permitAll().successHandler(loginSuccessHandler)
             .and()
-            .logout()
+            .logout().permitAll() //test to permitall
             .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))            
             .logoutSuccessUrl("/login")
             .invalidateHttpSession(true)        // set invalidation state when logout
