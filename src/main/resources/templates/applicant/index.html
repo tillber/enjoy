@@ -50,15 +50,15 @@
 	</div>
 
 	<hr>
-
+<form action="#" th:action="@{/applicant}" th:object="${application}" method="post">
 	<h6 class="subtitle is-6">Experience</h6>
 	<div class="flex-container">
 		<div class="field">
 			<label class="label">Area of expertise</label>
 			<div class="control">
 				<div class="select">
-					<select id="exp-area">
-						<option th:each="competence: ${competences}"><p th:text="${competence.name}"></p></option>
+					<select id="exp-area" th:field="*{experience.areaOfExpertise}">
+						<option th:each="competence: ${competences}" th:value="${competence.name}"><span th:text="${competence.name}">Competence</span></option>
 					</select>
 				</div>
 			</div>
@@ -66,89 +66,33 @@
 		<div class="field">
 			<label class="label">Number of years</label>
 			<div class="control">
-				<input class="input" type="number" value="1" min="1" id="exp-years" required>
+				<input class="input" type="number" value="1" min="1" id="exp-years" th:field="*{experience.numberOfYears}" required>
 			</div>
 		</div>
-		<div class="field">
-			<label class="label">	&nbsp;</label>
-			<div class="control">
-				<button class="button" id="add-exp">Add experience</button>
-			</div>
-		</div>
-	</div>
-
-	<div class="flex-container">
-	<div>
-		<table class="table is-fullwidth" id="exp-table">
-				<thead>
-					<tr>
-						<th>
-							Area of expertise
-						</th>
-						<th>
-							Number of years
-						</th>
-						<th></th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-					</tr>
-				</tbody>
-			</table>
-			</div>
 	</div>
 
 	<hr>
 
 	<h6 class="subtitle is-6">Availability</h6>
-	<form id="avail-form">
 	<div class="flex-container">
 		<div class="field">
 			<label class="label">From</label>
 			<div class="control">
-				<input id="avail-from" class="input" type="date" required>
+				<input id="avail-from" class="input" type="date" th:field="*{availability.fromDate}" required>
 			</div>
 		</div>
 		<div class="field">
 			<label class="label">To</label>
 			<div class="control">
-				<input id="avail-to" class="input" type="date" required>
+				<input id="avail-to" class="input" type="date" th:field="*{availability.toDate}" required>
 			</div>
 		</div>
-		<div class="field">
-			<label class="label">	&nbsp;</label>
-			<div class="control">
-				<input type="submit" class="button" value="Add period"/>
-			</div>
-		</div>
-	</div>
-	</form>
-	<div class="flex-container">
-	<div>
-		<table class="table is-fullwidth" id="avail-table">
-				<thead>
-					<tr>
-						<th>
-							From
-						</th>
-						<th>
-							To
-						</th>
-						<th></th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-					</tr>
-				</tbody>
-			</table>
-			</div>
 	</div>
 	<hr>
 	<div class="send-application">
-	  <button class="button is-link">Send application</button>
+	  <button type="submit" class="button is-link">Send application</button>
 	</div>
+	</form>
 	</div>
 	</div>
 </body>

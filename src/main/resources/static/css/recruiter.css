@@ -7,3 +7,16 @@
 .message-body{
 	padding: 0.5rem 1rem !important;
 }
+div.application{
+	height: 5rem;
+	border: 0;
+}
+.no-padding{
+	padding: 0 !important;
+}
+div.app .area{
+	margin: 1rem;
+}
+div.app hr{
+	margin: 0.5rem 0;
+}

@@ -5,23 +5,24 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import se.madev.main.controller.ApplicationService;
 import se.madev.main.controller.UserService;
+import se.madev.main.model.Application;
 import se.madev.main.model.MyUserDetails;
 import se.madev.main.model.Role;
 import se.madev.main.model.User;
@@ -36,18 +37,29 @@ public class RequestDispatcher {
 	@Autowired
 	ApplicationService applicationService;
 	
-	@GetMapping("/login")
+	
+	@RequestMapping(value = "/")
+	public String index(Authentication authentication) {
+		Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+		if(authorities.contains(new SimpleGrantedAuthority(Role.Type.APPLICANT.toString()))) {
+			return "redirect:/applicant";
+        } else {
+        	return "redirect:/recruiter";
+        }
+	}
+	
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login() {
 		return "login";
     }
 	
-	@GetMapping("/register")
+	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public String getRegister(Model model) {
 		model.addAttribute("user", new User());
 		return "register";
 	}
 	
-	@PostMapping("/register")
+	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public String postRegister(@ModelAttribute @Valid User user, BindingResult result, Model model) {
 		if(result.hasErrors()) {
 			List<String> errors = new ArrayList<>();
@@ -67,36 +79,39 @@ public class RequestDispatcher {
 		}
 	}
 	
-	@GetMapping("/")
-	public String index(Model model, HttpServletRequest httpServletRequest) {
-		MyUserDetails user = (MyUserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+	@RequestMapping(value = "/applicant", method = RequestMethod.GET)
+	public String applicant(Model model) {
+		MyUserDetails user = getAuthenticatedUser();
+		model.addAttribute("competences", applicationService.getCompetences());
 		model.addAttribute("user", user);
-		
-		Collection<SimpleGrantedAuthority> authorities = (Collection<SimpleGrantedAuthority>) SecurityContextHolder.getContext().getAuthentication().getAuthorities();
-		if(authorities.contains(new SimpleGrantedAuthority(Role.Type.APPLICANT.toString()))) {
-			model.addAttribute("competences", applicationService.getCompetences());
-			return "applicant/index";
-        } else {
-        	return "recruiter/index";
-        }
-	}
-	
-	@GetMapping("/applicant")
-	String applicant(Model model) {
-		MyUserDetails user = (MyUserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		model.addAttribute("user", user);
+		model.addAttribute("application", new Application());
 		return "applicant/index";
 	}
 	
-	@GetMapping("/recruiter")
-	String recruiter(Model model) {
-		MyUserDetails user = (MyUserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+	@RequestMapping(value = "/applicant", method = RequestMethod.POST)
+	public String postApplication(@ModelAttribute @Valid Application application, BindingResult result, Model model) {
+		MyUserDetails user = getAuthenticatedUser();
+		model.addAttribute("user", user);
+		
+		application.setApplicant(new User(user));
+		System.err.println(application);
+		
+		return "applicant/index";
+	}
+	
+	@RequestMapping(value = "/recruiter", method = RequestMethod.GET)
+	public String recruiter(Model model) {
+		MyUserDetails user = getAuthenticatedUser();
 		model.addAttribute("user", user);
 		return "recruiter/index";
 	}
 	
-	@RequestMapping("/exceptions/403")
+	@RequestMapping(value = "/exceptions/403", method = RequestMethod.GET)
 	public String accessDenied() {
 	    return "exceptions/403";
+	}
+	
+	private MyUserDetails getAuthenticatedUser() {
+		return (MyUserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 	}
 }

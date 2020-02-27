@@ -2,6 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:layout="http://www.w3.org/1999/xhtml"  xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" layout:decorate="~{/fragments/layout}">
 <head>
 	<title>Recruiter</title>
+	
+	<!-- JS Files -->
+	<script th:src="@{/js/recruiter.js}"></script>
 </head>
 <body>
 <div layout:fragment="content">
@@ -36,7 +39,6 @@
 					<th>
 						Status
 					</th>
-					<th></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -46,23 +48,93 @@
 				<td>tillber@kth.se</td>
 				<td>1998-10-10</td>
 				<td>UNHANDLED</td>
-				<td><button class='button is-small'>See application</button></td>
 				</tr>
+				<tr><td colspan="7" class="application no-padding"><div class="app"><div class="area">
+
+	<h6 class="subtitle is-6">Personal information</h6>
+	<div class="flex-container">
+		<div class="field">
+			<label class="label">First name</label>
+		  <div class="control">
+		    <input class="input is-small" type="text" value="Mango" readonly>
+		  </div>
+		</div>
+		<div class="field">
+		  <label class="label">Last name</label>
+		  <div class="control">
+		    <input class="input is-small" type="text" value="Raja" readonly>
+		  </div>
+		</div>
+		<div class="field">
+		  <label class="label">Email</label>
+		  <div class="control">
+		    <input class="input is-small" type="email" value="Vitlök" readonly>
+		  </div>
+		</div>
+		<div class="field">
+		  <label class="label">Date of birth</label>
+		  <div class="control">
+		    <input class="input is-small" type="date" value="10/10/1998" readonly>
+		  </div>
+		</div>
+	</div>
+
+	<hr>
+<form action="#" method="post">
+	<h6 class="subtitle is-6">Experience</h6>
+	<div class="flex-container">
+		<div class="field">
+			<label class="label">Area of expertise</label>
+			<div class="control">
+				<input class="input is-small" type="text" value="Vitlök" readonly>
+			</div>
+		</div>
+		<div class="field">
+			<label class="label">Number of years</label>
+			<div class="control">
+				<input class="input is-small" type="number" value="1" min="1" id="exp-years" readonly>
+			</div>
+		</div>
+	</div>
+
+	<hr>
+
+	<h6 class="subtitle is-6">Availability</h6>
+	<div class="flex-container">
+		<div class="field">
+			<label class="label">From</label>
+			<div class="control">
+				<input id="avail-from" class="input is-small" type="date" readonly>
+			</div>
+		</div>
+		<div class="field">
+			<label class="label">To</label>
+			<div class="control">
+				<input id="avail-to" class="input is-small" type="date" readonly>
+			</div>
+		</div>
+	</div>
+	<hr>
+	<div class="buttons">
+	  <button class="button is-danger is-small">Reject</button>
+	  <button class="button is-primary is-small">Accept</button>
+	</div>
+	</form>
+	</div></div></td></tr>
 				<tr class="has-background-white-bis">
 				<td>Martin</td>
 				<td>Tillberg</td>
 				<td>tillber@kth.se</td>
 				<td>1998-10-10</td>
 				<td>UNHANDLED</td>
-				<td><button class='button is-small'>See application</button></td>
 				</tr>
+				<tr><td colspan="7" class="application no-padding"><div style="height: 5vw; padding: 0.5rem">Hello World</div></td></tr>
 				<tr class="has-background-white-bis">
 				<td>Martin</td>
 				<td>Tillberg</td>
 				<td>tillber@kth.se</td>
 				<td>1998-10-10</td>
 				<td>UNHANDLED</td>
-				<td><button class='button is-small'>See application</button></td>
 				</tr>
 			</tbody>
 		</table>
