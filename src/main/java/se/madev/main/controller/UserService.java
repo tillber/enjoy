@@ -51,7 +51,7 @@ public class UserService implements UserDetailsService {
 
         //Application application = applicationRepository.findByApplicant(user);
         //Experience experience = application.getExperience();
-        //System.out.println(experience);
+        //System.err.println(application);
         return new MyUserDetails(user);
     }
 

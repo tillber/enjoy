@@ -1,193 +1,125 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:layout="http://www.w3.org/1999/xhtml"  xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" layout:decorate="~{/fragments/layout}">
-<head>
-	<title>Recruiter</title>
-	
-	<!-- JS Files -->
-	<script th:src="@{/js/recruiter.js}"></script>
-</head>
+	<head>
+		<title>Recruiter</title>
+
+		<!-- JS Files -->
+		<script th:src="@{/js/recruiter.js}"></script>
+	</head>
 <body>
-<div layout:fragment="content">
-<div class="area">
-<div>
-<p class="title is-2 is-spaced">Welcome, <span th:text="${user.firstName}">NOT FOUND</span>!</p>
-<article class="message is-link">
-  <div class="message-body">
-    20 unhandled applications
-  </div>
-</article>
-</div>
-<hr>
-<div class="flex-container">
-<div>
-<h6 class="title is-6">Unhandled applications</h6>
-	<table class="table is-fullwidth" id="avail-table">
-			<thead>
-				<tr>
-					<th>
-						First name
-					</th>
-					<th>
-						Last name
-					</th>
-					<th>
-						Email
-					</th>
-					<th>
-						Date of birth
-					</th>
-					<th>
-						Status
-					</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr class="has-background-white-bis">
-				<td>Martin</td>
-				<td>Tillberg</td>
-				<td>tillber@kth.se</td>
-				<td>1998-10-10</td>
-				<td>UNHANDLED</td>
-				</tr>
-				<tr><td colspan="7" class="application no-padding"><div class="app"><div class="area">
+	<div layout:fragment="content">
+		<div class="area">
+			<div class="flex-container">
+				<div>
+					<h6 class="title is-6">Applications</h6>
+					<table class="table is-fullwidth" id="avail-table">
+						<thead>
+							<tr>
+								<th>
+									First name
+								</th>
+								<th>
+									Last name
+								</th>
+								<th>
+									Email
+								</th>
+								<th>
+									Date of birth
+								</th>
+								<th>
+									Status
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							<!-- Application Template -->
+							<th:block th:each="app: ${applications}">
+							<tr class="has-background-white-bis">
+								<td><span th:text="${app.applicant.firstName}">FirstName</span></td>
+								<td><span th:text="${app.applicant.lastName}">LastName</span></td>
+								<td><span th:text="${app.applicant.email}">Email</span></td>
+								<td><span th:text="${app.applicant.dateOfBirth}">DateOfBirth</span></td>
+								<td><span th:text="${app.status.type}">Status</span></td>
+							</tr>
+							<tr>
+								<td colspan="7" class="application no-padding">
+									<div class="app">
+										<div class="area">
+											<h6 class="subtitle is-6">Personal information</h6>
+											<div class="flex-container">
+												<div class="field">
+													<label class="label">First name</label>
+													<div class="control">
+														<input class="input is-small" type="text" th:value="${app.applicant.firstName}" readonly>
+													</div>
+												</div>
+												<div class="field">
+													<label class="label">Last name</label>
+													<div class="control">
+														<input class="input is-small" type="text" th:value="${app.applicant.lastName}" readonly>
+													</div>
+												</div>
+												<div class="field">
+													<label class="label">Email</label>
+													<div class="control">
+														<input class="input is-small" type="email" th:value="${app.applicant.email}" readonly>
+													</div>
+												</div>
+												<div class="field">
+													<label class="label">Date of birth</label>
+													<div class="control">
+														<input class="input is-small" type="text" th:value="${app.applicant.dateOfBirth}" readonly>
+													</div>
+												</div>
+											</div>
 
-	<h6 class="subtitle is-6">Personal information</h6>
-	<div class="flex-container">
-		<div class="field">
-			<label class="label">First name</label>
-		  <div class="control">
-		    <input class="input is-small" type="text" value="Mango" readonly>
-		  </div>
-		</div>
-		<div class="field">
-		  <label class="label">Last name</label>
-		  <div class="control">
-		    <input class="input is-small" type="text" value="Raja" readonly>
-		  </div>
-		</div>
-		<div class="field">
-		  <label class="label">Email</label>
-		  <div class="control">
-		    <input class="input is-small" type="email" value="Vitlök" readonly>
-		  </div>
-		</div>
-		<div class="field">
-		  <label class="label">Date of birth</label>
-		  <div class="control">
-		    <input class="input is-small" type="date" value="10/10/1998" readonly>
-		  </div>
-		</div>
-	</div>
+											<hr>
 
-	<hr>
-<form action="#" method="post">
-	<h6 class="subtitle is-6">Experience</h6>
-	<div class="flex-container">
-		<div class="field">
-			<label class="label">Area of expertise</label>
-			<div class="control">
-				<input class="input is-small" type="text" value="Vitlök" readonly>
+											<h6 class="subtitle is-6">Experience</h6>
+											<div class="flex-container">
+												<div class="field">
+													<label class="label">Area of expertise</label>
+													<div class="control">
+														<input class="input is-small" type="text" th:value="${app.experience.areaOfExpertise}" readonly>
+													</div>
+												</div>
+												<div class="field">
+													<label class="label">Number of years</label>
+													<div class="control">
+														<input class="input is-small" type="number" th:value="${app.experience.numberOfYears}" id="exp-years" readonly>
+													</div>
+												</div>
+											</div>
+
+											<hr>
+
+											<h6 class="subtitle is-6">Availability</h6>
+											<div class="flex-container">
+												<div class="field">
+													<label class="label">From</label>
+													<div class="control">
+														<input id="avail-from" class="input is-small" type="text" th:value="${app.availability.fromDate}" readonly>
+													</div>
+												</div>
+												<div class="field">
+													<label class="label">To</label>
+													<div class="control">
+														<input id="avail-to" class="input is-small" th:value="${app.availability.toDate}" type="text" readonly>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</td>
+							</tr>
+							</th:block>
+							<!-- End of Application Template -->
+						</tbody>
+					</table>
+				</div>
 			</div>
 		</div>
-		<div class="field">
-			<label class="label">Number of years</label>
-			<div class="control">
-				<input class="input is-small" type="number" value="1" min="1" id="exp-years" readonly>
-			</div>
-		</div>
 	</div>
-
-	<hr>
-
-	<h6 class="subtitle is-6">Availability</h6>
-	<div class="flex-container">
-		<div class="field">
-			<label class="label">From</label>
-			<div class="control">
-				<input id="avail-from" class="input is-small" type="date" readonly>
-			</div>
-		</div>
-		<div class="field">
-			<label class="label">To</label>
-			<div class="control">
-				<input id="avail-to" class="input is-small" type="date" readonly>
-			</div>
-		</div>
-	</div>
-	<hr>
-	<div class="buttons">
-	  <button class="button is-danger is-small">Reject</button>
-	  <button class="button is-primary is-small">Accept</button>
-	</div>
-	</form>
-	</div></div></td></tr>
-				<tr class="has-background-white-bis">
-				<td>Martin</td>
-				<td>Tillberg</td>
-				<td>tillber@kth.se</td>
-				<td>1998-10-10</td>
-				<td>UNHANDLED</td>
-				</tr>
-				<tr><td colspan="7" class="application no-padding"><div style="height: 5vw; padding: 0.5rem">Hello World</div></td></tr>
-				<tr class="has-background-white-bis">
-				<td>Martin</td>
-				<td>Tillberg</td>
-				<td>tillber@kth.se</td>
-				<td>1998-10-10</td>
-				<td>UNHANDLED</td>
-				</tr>
-			</tbody>
-		</table>
-		</div>
-</div>
-<hr>
-<div class="flex-container">
-<div>
-<h6 class="title is-6">Handled applications</h6>
-	<table class="table is-fullwidth" id="avail-table">
-			<thead>
-				<tr>
-					<th>
-						First name
-					</th>
-					<th>
-						Last name
-					</th>
-					<th>
-						Email
-					</th>
-					<th>
-						Date of birth
-					</th>
-					<th>
-						Status
-					</th>
-					<th></th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr class="has-background-primary-light">
-				<td>Martin</td>
-				<td>Tillberg</td>
-				<td>tillber@kth.se</td>
-				<td>1998-10-10</td>
-				<td>ACCEPTED</td>
-				<td><button class='button is-small'>See application</button></td>
-				</tr>
-				<tr class="has-background-danger-light">
-				<td>Martin</td>
-				<td>Tillberg</td>
-				<td>tillber@kth.se</td>
-				<td>1998-10-10</td>
-				<td>REJECTED</td>
-				<td><button class='button is-small'>See application</button></td>
-				</tr>
-			</tbody>
-		</table>
-		</div>
-</div>
-<hr>
-</div>
-</div>
 </body>
 </html>

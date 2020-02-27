@@ -1,5 +1,7 @@
 package se.madev.main.integration;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import se.madev.main.model.Application;
@@ -13,5 +15,5 @@ public interface ApplicationRepository extends JpaRepository<Application, Intege
     
     Application existsByApplicant(User applicant);
     
-    int countByStatus(Status status);
+    List<Application> findAll();
 }

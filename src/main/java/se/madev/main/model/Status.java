@@ -21,7 +21,7 @@ public class Status {
     	this.type = type;
     }
     
-    public Type getName(){ 
+    public Type getType(){ 
     	return this.type; 
     }
 

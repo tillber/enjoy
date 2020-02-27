@@ -103,6 +103,7 @@ public class RequestDispatcher {
 	public String recruiter(Model model) {
 		MyUserDetails user = getAuthenticatedUser();
 		model.addAttribute("user", user);
+		model.addAttribute("applications", applicationService.getApplications());
 		return "recruiter/index";
 	}
 	

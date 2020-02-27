@@ -6,7 +6,10 @@ body, html{
 	margin-left: 1rem !important;
 }
 footer{
-	padding: 1rem !important;
+	position: absolute;
+    width: 100%;
+    bottom: 0;
+    padding: 1rem !important;
 }
 div.area{
 	margin-left: 2.5rem;
