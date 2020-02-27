@@ -14,8 +14,9 @@ public class Experience {
 	@JoinColumn(name="applicationid")
 	private Application application;
 
-	@Column(name="competenceid")
-	private String areaOfExpertise;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="competenceid")
+	private Competence areaOfExpertise;
 
 	@Column(name="yearsofexp")
 	private int numberOfYears;
@@ -30,11 +31,11 @@ public class Experience {
 
 	public void setApplicationId(Application application){ this.application = application; }
 
-	public String getAreaOfExpertise() {
+	public Competence getAreaOfExpertise() {
 		return areaOfExpertise;
 	}
 
-	public void setAreaOfExpertise(String areaOfExpertise) {
+	public void setAreaOfExpertise(Competence areaOfExpertise) {
 		this.areaOfExpertise = areaOfExpertise;
 	}
 
@@ -48,6 +49,6 @@ public class Experience {
 
 	@Override
 	public String toString() {
-		return "Experience [areaOfExpertise=" + areaOfExpertise + ", numberOfYears=" + numberOfYears + "]";
+		return "Experience [areaOfExpertise=" + areaOfExpertise.getName() + ", numberOfYears=" + numberOfYears + "]";
 	}
 }
