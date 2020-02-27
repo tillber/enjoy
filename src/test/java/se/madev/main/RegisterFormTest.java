@@ -56,8 +56,7 @@ class RegisterFormTest {
 	            	.param("username", username)
 	            	.param("password", password)
 	            	.param("dateOfBirth", dateOfBirth)
-	            	.param("role", role)
-	            	.param("lool", "haha"))
+	            	.param("role", role))
 	    		.andExpect(status().isOk())
 	    		.andReturn();
 	   String content = result.getResponse().getContentAsString();

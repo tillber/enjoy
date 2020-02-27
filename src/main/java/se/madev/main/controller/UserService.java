@@ -9,20 +9,14 @@ import org.springframework.stereotype.Service;
 
 import org.springframework.transaction.annotation.Propagation;
 
-<<<<<<< HEAD
 import se.madev.main.integration.RoleRepository;
 import se.madev.main.integration.UserRepository;
 import se.madev.main.model.MyUserDetails;
 import se.madev.main.model.Role;
 import se.madev.main.model.User;
 import se.madev.main.model.UserAlreadyExistsException;
-=======
-import se.madev.main.integration.ApplicationRepository;
-import se.madev.main.integration.RoleRepository;
-import se.madev.main.integration.UserRepository;
-import se.madev.main.model.*;
->>>>>>> ecc7672329bc89e57cbb9d0836422b87e931d955
 
+import se.madev.main.integration.ApplicationRepository;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -40,7 +34,6 @@ public class UserService implements UserDetailsService {
 
 	@Autowired
     ApplicationRepository applicationRepository;
-
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
@@ -68,7 +61,6 @@ public class UserService implements UserDetailsService {
      * Stores a new unique applicant user into the database.
      * @param user
      * @throws UserAlreadyExistsException
-     * @throws UserUnderAgedException 
      */
     public void registerApplicant(User user) throws UserAlreadyExistsException{
     	user.setRole(roleRepository.findByType(Role.Type.APPLICANT));
