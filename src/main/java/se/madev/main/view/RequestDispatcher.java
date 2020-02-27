@@ -63,7 +63,7 @@ public class RequestDispatcher {
 				model.addAttribute("errors", Arrays.asList(e.getMessage()));
 				return "register";
 			}
-			return "login";
+			return "redirect:/login";
 		}
 	}
 	

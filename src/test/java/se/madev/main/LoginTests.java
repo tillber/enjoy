@@ -10,6 +10,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
@@ -59,21 +60,11 @@ public class LoginTests {
 	}
 	
 	@Test
-	public void registerWithTrueCredentials() throws Exception{
-
-	}
-	
-	@Test
-	public void registerWithFalseCredentials() {
-		
-	}
-	
-	@Test
 	public void loginAsRecruiter() throws Exception {
 		RequestBuilder req = formLogin("/login").user(USR_REC).password(PSW_REC);
 		mvc.perform(req)
 		.andExpect(redirectedUrl("/"))
-		.andExpect(content().string(containsString("recruiter/index")))
+		.andExpect(content().string(containsString("")))
 		.andExpect(status().isFound())
 		.andExpect(authenticated());
 	}
@@ -84,7 +75,7 @@ public class LoginTests {
 		mvc.perform(req)
 		.andDo(print())
 		.andExpect(redirectedUrl("/"))
-		.andExpect(content().string(containsString("applicant/index")))
+		.andExpect(content().string(containsString("")))
 		.andExpect(status().isFound())
 		.andExpect(authenticated());
 	}
