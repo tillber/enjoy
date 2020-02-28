@@ -22,3 +22,6 @@ p.step-text{
 .application-title{
 	margin-top: 2rem;
 }
+footer{
+	position: relative !important;
+}

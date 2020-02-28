@@ -1,15 +1,16 @@
 body, html{
 	height: 100%;
-	margin-bottom: 4rem;
+	margin: 0;
 }
 .navbar-brand{
 	margin-left: 1rem !important;
 }
 footer{
-	position: absolute;
-    width: 100%;
-    bottom: 0;
     padding: 1rem !important;
+    bottom: 0;
+    position: absolute;
+    width: 100%;
+    text-align: center;
 }
 div.area{
 	margin-left: 2.5rem;
