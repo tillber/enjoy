@@ -57,6 +57,7 @@ public class User implements Serializable{
     
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Past(message = "Invalid date of birth!")
+    @NonUnderAged(message = "You must be 15 or older to register!")
     @Column(name="dateofbirth")
     private Date dateOfBirth;
     

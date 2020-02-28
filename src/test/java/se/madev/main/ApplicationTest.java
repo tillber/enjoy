@@ -3,6 +3,9 @@ package se.madev.main;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestBuilders.formLogin;
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -40,6 +43,7 @@ public class ApplicationTest {
 	@Test
 	public void fillFormDetailsCorrect() throws Exception {
 		RequestBuilder login = formLogin("/login").user(USR).password(PSW);
+		mvc.perform(login).andExpect(redirectedUrl("/home")).andExpect(status().isFound());
 		
 	}
 
