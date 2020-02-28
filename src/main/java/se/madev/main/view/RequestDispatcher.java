@@ -69,11 +69,11 @@ public class RequestDispatcher {
 	public String getRegister(Model model) {
 		try {
 			model.addAttribute("user", new User());
-			return "redirect:/register";
+			return "register";
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			model.addAttribute("error", "Operation failed!");
-			return "redirect:/register";
+			return "register";
 		}
 	}
 	
