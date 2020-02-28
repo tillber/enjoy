@@ -39,7 +39,7 @@
 								<td><span th:text="${app.applicant.firstName}">FirstName</span></td>
 								<td><span th:text="${app.applicant.lastName}">LastName</span></td>
 								<td><span th:text="${app.applicant.email}">Email</span></td>
-								<td><span th:text="${app.applicant.dateOfBirth}">DateOfBirth</span></td>
+								<td><span th:text="${#dates.format(app.applicant.dateOfBirth, 'dd-MM-yyyy')}">DateOfBirth</span></td>
 								<td><span th:text="${app.status.type}">Status</span></td>
 							</tr>
 							<tr>

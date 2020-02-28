@@ -27,4 +27,11 @@
     </div>
   </div>
 </nav>
+<div th:if="${error}" class="alert alert-error">
+	<article class="message is-danger">
+		<div class="message-body">
+			<p th:text="${error}"/>
+		</div>
+	</article>
+</div>
 </header>

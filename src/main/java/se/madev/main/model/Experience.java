@@ -10,11 +10,11 @@ public class Experience {
 	@Column(name="id")
 	private int id;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="applicationid")
 	private Application application;
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name="competenceid")
 	private Competence areaOfExpertise;
 
@@ -49,6 +49,6 @@ public class Experience {
 
 	@Override
 	public String toString() {
-		return "Experience [areaOfExpertise=" + areaOfExpertise.getName() + ", numberOfYears=" + numberOfYears + "]";
+		return "Experience [application=" + application.getId() + ", areaOfExpertise=" + areaOfExpertise.getName() + ", numberOfYears=" + numberOfYears + "]";
 	}
 }

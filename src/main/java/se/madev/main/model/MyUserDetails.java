@@ -6,11 +6,12 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Arrays;
 import java.util.Collection;
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 public class MyUserDetails implements UserDetails {
-
+	
+	private int id;
     private String username;
     private String password;
     private String firstName;
@@ -23,6 +24,7 @@ public class MyUserDetails implements UserDetails {
     private List<GrantedAuthority> authorities;
 
     public MyUserDetails(User user) {
+    	this.id = user.getId();
         this.username = user.getUsername();
         this.password = user.getPassword();
         this.firstName = user.getFirstName();
@@ -37,6 +39,11 @@ public class MyUserDetails implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Arrays.asList(new SimpleGrantedAuthority(getRole().getType().toString()));
+    }
+    
+    
+    public int getId() {
+    	return id;
     }
 
     @Override

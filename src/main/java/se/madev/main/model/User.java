@@ -1,7 +1,7 @@
 package se.madev.main.model;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -65,6 +65,7 @@ public class User implements Serializable{
     private Role role;
     
     public User(MyUserDetails user) {
+    	this.id = user.getId();
     	this.username = user.getUsername();
         this.password = user.getPassword();
         this.firstName = user.getFirstName();

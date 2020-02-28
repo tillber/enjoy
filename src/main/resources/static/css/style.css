@@ -35,3 +35,6 @@ div.flex-container > div:last-child{
 .subtitle{
 	margin-bottom: 0 !important;
 }
+div.alert{
+	padding: 1rem;
+}

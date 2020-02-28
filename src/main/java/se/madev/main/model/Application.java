@@ -19,9 +19,9 @@ public class Application {
 	private Availability availability;
 
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "application", orphanRemoval = true)
-	private Experience experience; 
+	private Experience experience;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name="status")
 	private Status status;
 

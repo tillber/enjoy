@@ -58,7 +58,9 @@
 			<div class="control">
 				<div class="select">
 					<select id="exp-area" th:field="*{experience.areaOfExpertise.name}">
-						<option th:each="competence: ${competences}" th:value="${competence.name}"><span th:text="${competence.name}">Competence</span></option>
+					<th:block th:each="competence: ${competences}">
+						<option th:value="${competence.name}" th:text="${competence.name}"></option>
+					</th:block>
 					</select>
 				</div>
 			</div>

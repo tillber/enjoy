@@ -39,72 +39,116 @@ public class RequestDispatcher {
 	
 	
 	@RequestMapping(value = "/")
-	public String index(Authentication authentication) {
-		Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
-		if(authorities.contains(new SimpleGrantedAuthority(Role.Type.APPLICANT.toString()))) {
-			return "redirect:/applicant";
-        } else {
-        	return "redirect:/recruiter";
-        }
+	public String index(Authentication authentication, Model model) {
+		try {
+			Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+			if(authorities.contains(new SimpleGrantedAuthority(Role.Type.APPLICANT.toString()))) {
+				return "redirect:/applicant";
+			} else {
+				return "redirect:/recruiter";
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			model.addAttribute("error", "Operation failed!");
+			return "redirect:/login";
+		}
 	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String login() {
-		return "login";
+    public String login(Model model) {
+		try {
+			return "login";
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			model.addAttribute("error", "Operation failed!");
+			return "login";
+		}
     }
 	
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public String getRegister(Model model) {
-		model.addAttribute("user", new User());
-		return "register";
+		try {
+			model.addAttribute("user", new User());
+			return "register";
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			model.addAttribute("error", "Operation failed!");
+			return "register";
+		}
 	}
 	
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public String postRegister(@ModelAttribute @Valid User user, BindingResult result, Model model) {
-		if(result.hasErrors()) {
-			List<String> errors = new ArrayList<>();
-			for (FieldError error : result.getFieldErrors()) {
-				errors.add(error.getDefaultMessage());
-			}
-			model.addAttribute("errors", errors);
-			return "register";
-		}else {
-			try {
-				userDetailsService.registerApplicant(user);
-			} catch (UserAlreadyExistsException e) {
-				model.addAttribute("errors", Arrays.asList(e.getMessage()));
+		try {
+			if(result.hasErrors()) {
+				List<String> errors = new ArrayList<>();
+				for (FieldError error : result.getFieldErrors()) {
+					errors.add(error.getDefaultMessage());
+				}
+				model.addAttribute("errors", errors);
 				return "register";
+			}else {
+				try {
+					userDetailsService.registerApplicant(user);
+				} catch (UserAlreadyExistsException e) {
+					model.addAttribute("errors", Arrays.asList(e.getMessage()));
+					return "register";
+				}
+				return "redirect:/login";
 			}
-			return "redirect:/login";
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			model.addAttribute("error", "Operation failed!");
+			return "register";
 		}
 	}
 	
 	@RequestMapping(value = "/applicant", method = RequestMethod.GET)
 	public String applicant(Model model) {
-		MyUserDetails user = getAuthenticatedUser();
-		model.addAttribute("competences", applicationService.getCompetences());
-		model.addAttribute("user", user);
-		model.addAttribute("application", new Application());
-		return "applicant/index";
+		try {
+			MyUserDetails user = getAuthenticatedUser();
+			model.addAttribute("competences", applicationService.getCompetences());
+			model.addAttribute("user", user);
+			model.addAttribute("application", new Application());
+			return "applicant/index";
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			model.addAttribute("error", "Operation failed!");
+			return "applicant/index";
+		}
 	}
 	
 	@RequestMapping(value = "/applicant", method = RequestMethod.POST)
 	public String postApplication(@ModelAttribute @Valid Application application, BindingResult result, Model model) {
-		MyUserDetails user = getAuthenticatedUser();
-		model.addAttribute("user", user);
-		
-		application.setApplicant(new User(user));
-		System.err.println(application);
-		
-		return "applicant/index";
+		try {
+			MyUserDetails user = getAuthenticatedUser();
+			model.addAttribute("user", user);
+			model.addAttribute("competences", applicationService.getCompetences());
+			application.setApplicant(new User(user));
+			applicationService.saveApplication(application);
+			
+			return "applicant/index";
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			model.addAttribute("error", "Operation failed!");
+			return "applicant/index";
+		}
 	}
 	
 	@RequestMapping(value = "/recruiter", method = RequestMethod.GET)
 	public String recruiter(Model model) {
-		MyUserDetails user = getAuthenticatedUser();
-		model.addAttribute("user", user);
-		model.addAttribute("applications", applicationService.getApplications());
-		return "recruiter/index";
+		try {
+			MyUserDetails user = getAuthenticatedUser();
+			model.addAttribute("user", user);
+			
+			List<Application> applications = applicationService.getApplications();
+			model.addAttribute("applications", applications);
+			return "recruiter/index";
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			model.addAttribute("error", "Operation failed!");
+			return "recruiter/index";
+		}
 	}
 	
 	@RequestMapping(value = "/exceptions/403", method = RequestMethod.GET)
