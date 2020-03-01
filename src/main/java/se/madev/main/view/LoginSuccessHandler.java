@@ -18,7 +18,7 @@ import se.madev.main.model.Role;
 
 /**
  * This Spring Component handles the redirect after a successful authentication.
- * @author tillber
+ * @author madev
  *
  */
 @Component
@@ -47,9 +47,9 @@ public class LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler{
 	protected String determineTarget(Authentication authentication) {
 		Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
 		if(authorities.contains(new SimpleGrantedAuthority(Role.Type.APPLICANT.toString()))) {
-			return View.APPLICANT_VIEW;
+			return View.APPLICANT;
         } else {
-        	return View.RECRUITER_VIEW;
+        	return View.RECRUITER;
         }
 	}
 }

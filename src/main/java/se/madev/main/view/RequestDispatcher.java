@@ -28,6 +28,11 @@ import se.madev.main.model.Role;
 import se.madev.main.model.User;
 import se.madev.main.model.UserAlreadyExistsException;
 
+/**
+ * This class takes care of all requests from the client view.
+ * @author madev
+ *
+ */
 @Controller
 public class RequestDispatcher {
 	
@@ -37,47 +42,56 @@ public class RequestDispatcher {
 	@Autowired
 	ApplicationService applicationService;
 	
-	
 	@RequestMapping(value = "/")
 	public String index(Authentication authentication, Model model) {
 		try {
 			Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
 			if(authorities.contains(new SimpleGrantedAuthority(Role.Type.APPLICANT.toString()))) {
-				return "redirect:/applicant";
+				return View.REDIRECT + View.APPLICANT;
 			} else {
-				return "redirect:/recruiter";
+				return View.REDIRECT + View.RECRUITER;
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			model.addAttribute("error", "Operation failed!");
-			return "redirect:/login";
+			return View.REDIRECT + View.LOGIN;
 		}
 	}
 	
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String login(Model model) {
+	/**
+	 * GET request mapping for the login page.
+	 */
+	@RequestMapping(value = "/" + View.LOGIN, method = RequestMethod.GET)
+    public String getLogin(Model model) {
 		try {
-			return "login";
+			return View.LOGIN;
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			model.addAttribute("error", "Operation failed!");
-			return "login";
+			return View.LOGIN;
 		}
     }
 	
-	@RequestMapping(value = "/register", method = RequestMethod.GET)
+	/**
+	 * GET request mapping for the register page.
+	 */
+	@RequestMapping(value = "/" + View.REGISTER, method = RequestMethod.GET)
 	public String getRegister(Model model) {
 		try {
 			model.addAttribute("user", new User());
-			return "register";
+			return View.REGISTER;
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			model.addAttribute("error", "Operation failed!");
-			return "register";
+			return View.REGISTER;
 		}
 	}
 	
-	@RequestMapping(value = "/register", method = RequestMethod.POST)
+	/**
+	 * POST request mapping for the register page.
+	 * @param user The user to be registered.
+	 */
+	@RequestMapping(value = "/" + View.REGISTER, method = RequestMethod.POST)
 	public String postRegister(@ModelAttribute @Valid User user, BindingResult result, Model model) {
 		try {
 			if(result.hasErrors()) {
@@ -86,76 +100,92 @@ public class RequestDispatcher {
 					errors.add(error.getDefaultMessage());
 				}
 				model.addAttribute("errors", errors);
-				return "register";
+				return View.REGISTER;
 			}else {
 				try {
 					userDetailsService.registerApplicant(user);
 				} catch (UserAlreadyExistsException e) {
 					model.addAttribute("errors", Arrays.asList(e.getMessage()));
-					return "register";
+					return View.REGISTER;
 				}
-				return "redirect:/login";
+				return View.REDIRECT + View.REGISTER;
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			model.addAttribute("error", "Operation failed!");
-			return "register";
+			return View.REGISTER;
 		}
 	}
 	
-	@RequestMapping(value = "/applicant", method = RequestMethod.GET)
-	public String applicant(Model model) {
+	/**
+	 * GET request mapping for the applicant view.
+	 */
+	@RequestMapping(value = "/" + View.APPLICANT, method = RequestMethod.GET)
+	public String getApplicant(Model model) {
 		try {
 			MyUserDetails user = getAuthenticatedUser();
 			model.addAttribute("competences", applicationService.getCompetences());
 			model.addAttribute("user", user);
 			model.addAttribute("application", new Application());
-			return "applicant/index";
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			model.addAttribute("error", "Operation failed!");
-			return "applicant/index";
 		}
+		
+		return View.APPLICANT + "/index";
 	}
 	
-	@RequestMapping(value = "/applicant", method = RequestMethod.POST)
-	public String postApplication(@ModelAttribute @Valid Application application, BindingResult result, Model model) {
+	/**
+	 * POST request mapping for the applicant view. 
+	 * @param application The application to be sent.
+	 */
+	@RequestMapping(value = "/" + View.APPLICANT, method = RequestMethod.POST)
+	public String postApplicant(@ModelAttribute @Valid Application application, BindingResult result, Model model) {
 		try {
 			MyUserDetails user = getAuthenticatedUser();
 			model.addAttribute("user", user);
 			model.addAttribute("competences", applicationService.getCompetences());
 			application.setApplicant(new User(user));
 			applicationService.saveApplication(application);
-			
-			return "applicant/index";
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			model.addAttribute("error", "Operation failed!");
-			return "applicant/index";
 		}
+		
+		return View.APPLICANT + "/index";
 	}
 	
-	@RequestMapping(value = "/recruiter", method = RequestMethod.GET)
-	public String recruiter(Model model) {
+	/**
+	 * GET request mapping for the recruiter view.
+	 */
+	@RequestMapping(value = "/" + View.RECRUITER, method = RequestMethod.GET)
+	public String getRecruiter(Model model) {
 		try {
 			MyUserDetails user = getAuthenticatedUser();
 			model.addAttribute("user", user);
 			
 			List<Application> applications = applicationService.getApplications();
 			model.addAttribute("applications", applications);
-			return "recruiter/index";
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			model.addAttribute("error", "Operation failed!");
-			return "recruiter/index";
 		}
+		
+		return View.RECRUITER + "/index";
 	}
 	
-	@RequestMapping(value = "/exceptions/403", method = RequestMethod.GET)
-	public String accessDenied() {
-	    return "exceptions/403";
+	/**
+	 * GET request mapping for the access denied page.
+	 */
+	@RequestMapping(value = "/" + View.EXCEPTION_403, method = RequestMethod.GET)
+	public String getAccessDenied() {
+	    return View.EXCEPTION_403;
 	}
 	
+	/**
+	 * Returns the authenticated user.
+	 * @return The authenticated user (currently logged in).
+	 */
 	private MyUserDetails getAuthenticatedUser() {
 		return (MyUserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 	}
