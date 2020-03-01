@@ -9,6 +9,11 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * This class is used for Spring Security and is used for logging in users.
+ * @author madev
+ *
+ */
 public class MyUserDetails implements UserDetails {
 	
 	private int id;

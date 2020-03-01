@@ -2,6 +2,11 @@ package se.madev.main.model;
 
 import javax.persistence.*;
 
+/**
+ * This entity depicts an application in the Recruitment Application.
+ * @author madev
+ *
+ */
 @Entity
 @Table(name="application")
 public class Application {

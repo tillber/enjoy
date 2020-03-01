@@ -2,6 +2,11 @@ package se.madev.main.model;
 
 import javax.persistence.*;
 
+/**
+ * This entity describes the status of each application in the system.
+ * @author madev
+ *
+ */
 @Entity
 @Table(name="status")
 public class Status {

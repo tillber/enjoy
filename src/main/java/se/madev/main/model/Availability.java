@@ -5,6 +5,11 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import java.sql.Date;
 
+/**
+ * This class depicts a period of availability in each application.
+ * @author madev
+ *
+ */
 @Entity
 @Table(name="Availability")
 public class Availability {

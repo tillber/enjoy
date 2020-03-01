@@ -17,6 +17,11 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import se.madev.main.model.Role;
 import se.madev.main.view.LoginSuccessHandler;
 
+/**
+ * Custom security configuration for the recruitment application.
+ * @author madev
+ *
+ */
 @EnableTransactionManagement
 @EnableWebSecurity
 @Configuration
@@ -74,10 +79,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
     
-    /**
-     * 
-     * @return
-     */
     @Bean
     public DaoAuthenticationProvider authProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();

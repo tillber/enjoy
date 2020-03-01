@@ -6,6 +6,11 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Application startup
+ * @author madev
+ *
+ */
 @SpringBootApplication
 @EnableJpaRepositories(basePackages = {"se.madev.main.integration"})
 public class Application {

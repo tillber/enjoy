@@ -5,6 +5,11 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/**
+ * This entity depicts an area of expertise used in the Experience object.
+ * @author madev
+ *
+ */
 @Entity
 @Table(name = "competence")
 public class Competence {
