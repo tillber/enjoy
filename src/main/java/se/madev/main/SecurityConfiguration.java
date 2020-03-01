@@ -15,6 +15,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import se.madev.main.model.Role;
+import se.madev.main.view.LoginSuccessHandler;
 
 @EnableTransactionManagement
 @EnableWebSecurity

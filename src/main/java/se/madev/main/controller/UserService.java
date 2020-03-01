@@ -66,7 +66,7 @@ public class UserService implements UserDetailsService {
             throw new UserAlreadyExistsException("A user with the given username already exists!");
         } else if(userRepository.existsByEmail(user.getEmail())){
         	throw new UserAlreadyExistsException("A user with the given email-address already exists!");
-        } 
+        }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
     }

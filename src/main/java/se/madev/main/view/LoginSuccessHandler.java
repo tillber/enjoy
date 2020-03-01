@@ -1,4 +1,4 @@
-package se.madev.main;
+package se.madev.main.view;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -16,10 +16,18 @@ import org.springframework.stereotype.Component;
 
 import se.madev.main.model.Role;
 
+/**
+ * This Spring Component handles the redirect after a successful authentication.
+ * @author tillber
+ *
+ */
 @Component
 public class LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler{
 	private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 	
+	/**
+	 * Takes care of the redirect after a successful login/authentication. 
+	 */
 	@Override
 	protected void handle(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {
 		String target = determineTarget(authentication);
@@ -32,12 +40,16 @@ public class LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler{
 		redirectStrategy.sendRedirect(request, response, target);
 	}
 	
+	/**
+	 * Determines the next view for the user, based on which role the user obtains.
+	 * @return The correct target view to show after login.
+	 */
 	protected String determineTarget(Authentication authentication) {
 		Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
 		if(authorities.contains(new SimpleGrantedAuthority(Role.Type.APPLICANT.toString()))) {
-			return "/applicant";
+			return View.APPLICANT_VIEW;
         } else {
-        	return "/recruiter";
+        	return View.RECRUITER_VIEW;
         }
 	}
 }
