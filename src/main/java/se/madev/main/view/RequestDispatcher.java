@@ -108,7 +108,7 @@ public class RequestDispatcher {
 					model.addAttribute("errors", Arrays.asList(e.getMessage()));
 					return View.REGISTER;
 				}
-				return View.REDIRECT + View.REGISTER;
+				return View.REDIRECT + View.LOGIN;
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
