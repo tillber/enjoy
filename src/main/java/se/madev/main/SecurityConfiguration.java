@@ -14,6 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import se.madev.main.integration.DbMigration.MigrationHandler;
 import se.madev.main.model.Role;
 
 @EnableTransactionManagement
@@ -23,6 +24,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
     UserDetailsService userDetailsService;
+
+	@Autowired
+    MigrationHandler migrationHandler;
+
+	/*@Autowired
+	LoginSuccessHandler loginSuccessHandler;*/
 
     /**
      * Adds authentication on a custom implementation of userDetailsService

@@ -25,7 +25,8 @@ public class Availability {
 	@Column(name="todate")
 	private Date toDate;
 	
-	public Availability(Date fromDate, Date toDate) {
+	public Availability(Application application, Date fromDate, Date toDate) {
+		this.application = application;
 		this.fromDate = fromDate;
 		this.toDate = toDate;
 	}

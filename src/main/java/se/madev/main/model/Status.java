@@ -12,25 +12,25 @@ public class Status {
     private int id;
 
     @Column(name="name")
-    @Enumerated(EnumType.STRING)
-    private Type type;
+    //@Enumerated(EnumType.STRING)
+    private String name;
 
     public Status(){}
 
-    public Status(Type type) { 
+   /* public Status(Type type) {
     	this.type = type;
-    }
+    }*/
     
-    public Type getName(){ 
-    	return this.type; 
+    public String getName(){
+    	return this.name;
     }
 
     public int getId() { 
     	return this.id;
     }
 
-    public void setType(Type type) { 
-    	this.type = type; 
+    public void setName(String name) {
+    	this.name = name;
     }
 
     public void setId(int id) { 
@@ -39,7 +39,7 @@ public class Status {
     
     @Override
 	public String toString() {
-		return "Status [type=" + type + "]";
+		return "Status [type=" + name + "]";
 	}
 
 	public enum Type {

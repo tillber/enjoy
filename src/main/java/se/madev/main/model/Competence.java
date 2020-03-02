@@ -11,23 +11,23 @@ public class Competence {
 	
 	@Id
 	@Column(name = "id")
-	private long id;
+	private int id;
 	
 	@Column(name = "name")
 	private String name;
 	
 	public Competence() {}
 
-	public Competence(long id, String name) {
+	public Competence(int id, String name) {
 		this.id = id;
 		this.name = name;
 	}
 
-	public long getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 

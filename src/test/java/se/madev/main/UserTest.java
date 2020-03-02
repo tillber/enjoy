@@ -69,7 +69,7 @@ public class UserTest {
 	@Autowired
 	private UserRepository usrRepo;	
 	private User[] initNewUsersAndPopulate() {
-		initRecRole();
+		//initRecRole();
 		users = new User[NUMBER_OF_USERS];
 		for(int i = 0; i < NUMBER_OF_USERS; i++) {
 			users[i] = createUser(FIRST_NAMES[i], LAST_NAMES[i], USERNAMES[i], EMAILS[i]);
@@ -77,7 +77,7 @@ public class UserTest {
 
 		return users;
     }	
-	private void initRecRole() {
+	/*private void initRecRole() {
 		recruiter = new Role();
 		recruiter.setType(RECRUITER_ROLE);
 		applicant = new Role();
@@ -85,7 +85,7 @@ public class UserTest {
 		
 		entityManager.persistAndFlush(recruiter);
 		entityManager.persistAndFlush(applicant);
-	}	
+	}*/
 	private User createUser(String firstName, String lastName, String username, String email) {
 		User newUser = new User();
 	   	newUser.setFirstName(firstName);

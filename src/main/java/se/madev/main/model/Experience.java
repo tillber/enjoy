@@ -22,6 +22,12 @@ public class Experience {
 	private int numberOfYears;
 
 	public Experience(){}
+
+	public Experience(Application application, Competence areaOfExpertise, int numberOfYears){
+		this.application = application;
+		this.areaOfExpertise = areaOfExpertise;
+		this.numberOfYears = numberOfYears;
+	}
 	
 	public int getId(){ return id; }
 

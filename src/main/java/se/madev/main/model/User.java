@@ -66,6 +66,16 @@ public class User implements Serializable{
         this.dateOfBirth = user.getDateOfBirth();
         this.role = user.getRole();
     }
+
+    public User(String firstname, String lastname, String email, String username, String password, Date dateOfBirth, Role role){
+    	this.firstName = firstname;
+    	this.lastName = lastname;
+    	this.email = email;
+    	this.username = username;
+    	this.password = password;
+    	this.dateOfBirth = dateOfBirth;
+    	this.role = role;
+	}
     
     public User() {}
 

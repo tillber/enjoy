@@ -26,7 +26,11 @@ public class Application {
 	private Status status;
 
 	public Application(){
-		status = new Status(Status.Type.UNHANDLED);
+		//status = new Status(Status.Type.UNHANDLED);
+	}
+
+	public Application(User user){
+		this.applicant = user;
 	}
 	
 	public int getId() {
