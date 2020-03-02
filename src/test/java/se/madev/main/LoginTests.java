@@ -63,7 +63,7 @@ public class LoginTests {
 	public void loginAsRecruiter() throws Exception {
 		RequestBuilder req = formLogin("/login").user(USR_REC).password(PSW_REC);
 		mvc.perform(req)
-		.andExpect(redirectedUrl("/"))
+		.andExpect(redirectedUrl("/recruiter"))
 		.andExpect(content().string(containsString("")))
 		.andExpect(status().isFound())
 		.andExpect(authenticated());
@@ -74,7 +74,7 @@ public class LoginTests {
 		RequestBuilder req = formLogin("/login").user(USR_APL).password(PSW_APL);
 		mvc.perform(req)
 		.andDo(print())
-		.andExpect(redirectedUrl("/"))
+		.andExpect(redirectedUrl("/applicant"))
 		.andExpect(content().string(containsString("")))
 		.andExpect(status().isFound())
 		.andExpect(authenticated());
@@ -92,9 +92,6 @@ public class LoginTests {
 			.andExpect(status().isFound())
 	        .andExpect(redirectedUrl(LOGIN_ERROR_URL))
 	        .andExpect(unauthenticated());
-
-//	    mvc.perform(get(LOGIN_ERROR_URL))
-//	         .andExpect(content().string(containsString(INVALID_CREDENTIALS)));
 	}
 	
 }
