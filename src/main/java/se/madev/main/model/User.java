@@ -40,7 +40,7 @@ public class User implements Serializable{
      */
     @Column(name="firstname")
     @NotBlank(message = "First name is mandatory")
-    @Pattern(regexp = "^[A-Za-z-]*$",message = "Invalid first name!")
+    @Pattern(regexp = "^[A-Za-z-åÅäÄöÖ]*$",message = "Invalid first name!")
     private String firstName;
     
     /**
@@ -48,7 +48,7 @@ public class User implements Serializable{
      */
     @Column(name="lastname")
     @NotBlank(message = "Last name is mandatory")
-    @Pattern(regexp = "^[A-Za-z-]*$", message = "Invalid last name!")
+    @Pattern(regexp = "^[A-Za-z-åÅäÄöÖ]*$", message = "Invalid last name!")
     private String lastName;
     
     /**
