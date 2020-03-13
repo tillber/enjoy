@@ -16,6 +16,7 @@ import se.madev.main.model.Competence;
  * @author madev
  *
  */
+@Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRES_NEW)
 @Service
 public class ApplicationService {
 
