@@ -1,2 +1,2 @@
-# MAD-Dev Recruitment Application
-## Check out the Git-Wiki for more information!
+Recruitment Application
+For more information, go to the wiki of this repository.
